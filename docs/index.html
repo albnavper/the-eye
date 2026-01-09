@@ -52,8 +52,35 @@
         }
 
         /* Sidebar responsive */
+        .sidebar {
+            transition: width 0.3s ease, transform 0.3s ease;
+        }
+
+        .sidebar.collapsed {
+            width: 0;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .sidebar.collapsed>* {
+            opacity: 0;
+        }
+
         @media (max-width: 768px) {
-            .sidebar-open .sidebar-overlay {
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100%;
+                z-index: 50;
+            }
+
+            .sidebar.collapsed {
+                transform: translateX(-100%);
+                width: 20rem;
+            }
+
+            .sidebar-overlay.active {
                 display: block;
             }
         }
@@ -72,14 +99,13 @@
     <div id="app" v-cloak class="flex w-full h-full">
 
         <!-- Sidebar Overlay (mobile) -->
-        <div class="sidebar-overlay" :class="{'!block': sidebarOpen}" @click="sidebarOpen = false"></div>
+        <div class="sidebar-overlay" :class="{'active': sidebarOpen}" @click="sidebarOpen = false"></div>
 
         <!-- Sidebar (Uptime Kuma style) -->
-        <aside
-            class="w-80 bg-surface border-r border-gray-700 flex flex-col shrink-0 transition-all duration-300 fixed md:relative h-full z-50"
-            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full md:-translate-x-full w-0'">
+        <aside class="sidebar w-80 bg-surface border-r border-gray-700 flex flex-col shrink-0"
+            :class="{'collapsed': !sidebarOpen}">
             <!-- Header -->
-            <div class="p-4 border-b border-gray-700 flex items-center justify-between">
+            <div class="p-4 border-b border-gray-700 flex items-center justify-between whitespace-nowrap">
                 <h1 class="text-xl font-bold flex items-center gap-2">
                     <i class="fa-solid fa-eye text-primary"></i> The Eye
                 </h1>
@@ -122,7 +148,7 @@
             </div>
 
             <!-- Footer -->
-            <div class="p-4 border-t border-gray-700 text-xs text-center text-gray-500">
+            <div class="p-4 border-t border-gray-700 text-xs text-center text-gray-500 whitespace-nowrap">
                 <button @click="importConfig" class="hover:text-primary mr-3">
                     <i class="fa-solid fa-file-import"></i> Import
                 </button>
@@ -135,9 +161,9 @@
         <!-- Main Content -->
         <main class="flex-1 flex flex-col min-w-0 bg-darker">
             <!-- Top Bar -->
-            <header class="h-14 bg-surface border-b border-gray-700 flex items-center px-4 justify-between">
+            <header class="h-14 bg-surface border-b border-gray-700 flex items-center px-4 justify-between shrink-0">
                 <div class="flex items-center gap-4">
-                    <button @click="sidebarOpen = !sidebarOpen" class="text-gray-400 hover:text-white">
+                    <button @click="sidebarOpen = !sidebarOpen" class="text-gray-400 hover:text-white p-2">
                         <i class="fa-solid fa-bars"></i>
                     </button>
                     <h2 v-if="activeSite" class="font-semibold text-lg">{{ activeSite.name }}</h2>
@@ -373,8 +399,8 @@
                 </div>
 
                 <!-- Actions Footer -->
-                <div class="fixed bottom-0 right-0 bg-surface/90 backdrop-blur border-t border-gray-700 p-4 flex justify-between items-center z-10 transition-all duration-300"
-                    :class="sidebarOpen ? 'left-80 md:left-80' : 'left-0'">
+                <div
+                    class="sticky bottom-0 bg-surface/95 backdrop-blur border-t border-gray-700 p-4 flex justify-between items-center z-10 -mx-6 -mb-6 px-6 mt-8">
                     <div>
                         <button @click="deleteSite"
                             class="text-red-400 hover:text-red-300 text-sm flex items-center gap-2">
