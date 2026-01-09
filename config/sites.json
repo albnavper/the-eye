@@ -1,7 +1,82 @@
 {
-    "sites": [],
+    "sites": [
+        {
+            "id": "dos-hermanas-bomberos",
+            "name": "Dos Hermanas Bomberos",
+            "url": "https://www.doshermanas.es/concejalias/relaciones-humanas/oposiciones/15-PLAZAS-DE-BOMBERO-A-CONDUCTOR-A-TURNO-LIBRE-MEDIANTE-CONCURSO-OPOSICION/",
+            "enabled": true,
+            "steps": [],
+            "extraction": {
+                "listSelector": ".galleries a[href*='.pdf']",
+                "fields": {
+                    "title": {
+                        "selector": ".",
+                        "attribute": null
+                    },
+                    "url": {
+                        "selector": ".",
+                        "attribute": "href"
+                    }
+                },
+                "deepSearch": {
+                    "enabled": false,
+                    "selector": "",
+                    "attribute": "href"
+                }
+            },
+            "timeout": 30000,
+            "retries": 2
+        },
+        {
+            "id": "cbpc-tablon",
+            "name": "CBPC Tablón de Anuncios",
+            "url": "https://sede.cbpc.es/opencms/opencms/sede",
+            "enabled": true,
+            "steps": [
+                {
+                    "action": "evaluate",
+                    "script": "const link = document.querySelector(\"a[title='Tablón de anuncios']\"); if(link) { link.removeAttribute('target'); link.click(); }"
+                },
+                {
+                    "action": "wait",
+                    "value": 3000
+                },
+                {
+                    "action": "wait_ajax"
+                },
+                {
+                    "action": "wait",
+                    "value": 5000
+                }
+            ],
+            "extraction": {
+                "listSelector": "a[title='Ver']",
+                "fields": {
+                    "title": {
+                        "selector": ".",
+                        "attribute": "title"
+                    },
+                    "url": {
+                        "selector": ".",
+                        "attribute": "href"
+                    }
+                },
+                "deepSearch": {
+                    "enabled": true,
+                    "selector": "a[title='Descargar']",
+                    "attribute": "href"
+                }
+            },
+            "timeout": 30000,
+            "retries": 2
+        }
+    ],
     "telegram": {
         "botToken": "${TELEGRAM_BOT_TOKEN}",
         "chatId": "${TELEGRAM_CHAT_ID}"
+    },
+    "defaults": {
+        "timeout": 30000,
+        "retries": 2
     }
 }

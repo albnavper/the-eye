@@ -36,7 +36,7 @@ export class Navigator {
         // Capture diagnostic info
         let screenshot = null;
         let html = null;
-        
+
         if (this.screenshotOnError) {
           try {
             screenshot = await page.screenshot({ fullPage: true });
@@ -77,9 +77,9 @@ export class Navigator {
         break;
 
       case 'waitForSelector':
-        await page.waitForSelector(step.selector, { 
+        await page.waitForSelector(step.selector, {
           state: step.state || 'visible',
-          timeout 
+          timeout
         });
         break;
 
@@ -106,7 +106,7 @@ export class Navigator {
         break;
 
       case 'wait':
-        await page.waitForTimeout(step.duration || 1000);
+        await page.waitForTimeout(step.duration || step.value || 1000);
         break;
 
       case 'wait_ajax':
@@ -115,9 +115,9 @@ export class Navigator {
         break;
 
       case 'waitForNavigation':
-        await page.waitForNavigation({ 
+        await page.waitForNavigation({
           waitUntil: step.waitUntil || 'load',
-          timeout 
+          timeout
         });
         break;
 
@@ -135,6 +135,16 @@ export class Navigator {
 
       case 'uncheck':
         await page.uncheck(step.selector, { timeout });
+        break;
+
+      case 'evaluate':
+        // Execute custom JavaScript
+        await page.evaluate(step.script);
+        break;
+
+      case 'goto':
+        // Navigate to a URL (useful after extracting href via evaluate)
+        await page.goto(step.url, { waitUntil: step.waitUntil || 'domcontentloaded', timeout });
         break;
 
       default:

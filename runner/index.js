@@ -170,6 +170,10 @@ async function processSite(site, browser, stateManager, notifier, args) {
 
         if (documents.length === 0) {
             console.log('  No documents found');
+            // Debug: save screenshot to see what the page looks like
+            const debugPath = path.join(ROOT_DIR, 'downloads', `debug-${site.id}-${Date.now()}.png`);
+            await page.screenshot({ path: debugPath, fullPage: true });
+            console.log(`  Debug screenshot saved: ${debugPath}`);
             await context.close();
             return { success: true, documents: 0, new: 0, updated: 0 };
         }
