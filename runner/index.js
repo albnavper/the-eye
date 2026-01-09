@@ -153,20 +153,20 @@ async function processSite(site, browser, stateManager, notifier, args) {
 
     try {
         // Step 1: Navigate to page
-        console.log('\n[1/5] Navigating to page...');
+        console.log('\n[1/6] Navigating to page...');
         await page.goto(site.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
 
         // Step 2: Execute navigation steps
         if (site.steps && site.steps.length > 0) {
-            console.log(`\n[2/5] Executing ${site.steps.length} navigation steps...`);
+            console.log(`\n[2/6] Executing ${site.steps.length} navigation steps...`);
             await navigator.navigate(page, site.steps);
         } else {
-            console.log('\n[2/5] No navigation steps configured');
+            console.log('\n[2/6] No navigation steps configured');
         }
 
         // Step 3: Extract documents
-        console.log('\n[3/5] Extracting documents...');
-        const documents = await extractor.extract(page, site.extraction);
+        console.log('\n[3/6] Extracting documents...');
+        let documents = await extractor.extract(page, site.extraction);
 
         if (documents.length === 0) {
             console.log('  No documents found');
@@ -174,13 +174,21 @@ async function processSite(site, browser, stateManager, notifier, args) {
             return { success: true, documents: 0, new: 0, updated: 0 };
         }
 
-        // Step 4: Compare with previous state
-        console.log('\n[4/5] Comparing with previous state...');
+        // Step 4: Deep Search (resolve intermediate URLs if configured)
+        if (site.extraction.deepSearch?.enabled) {
+            console.log('\n[4/6] Resolving deep links...');
+            documents = await extractor.resolveDeepLinks(page, documents, site.extraction.deepSearch);
+        } else {
+            console.log('\n[4/6] Deep search not configured, skipping...');
+        }
+
+        // Step 5: Compare with previous state
+        console.log('\n[5/6] Comparing with previous state...');
         const diff = stateManager.diff(site.id, documents);
         console.log(`  New: ${diff.new.length}, Updated: ${diff.updated.length}, Unchanged: ${diff.unchanged.length}`);
 
-        // Step 5: Process changes
-        console.log('\n[5/5] Processing changes...');
+        // Step 6: Process changes
+        console.log('\n[6/6] Processing changes...');
 
         const shouldNotify = !args.dryRun || args.notify;
         let processed = 0;

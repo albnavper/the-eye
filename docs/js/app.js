@@ -30,6 +30,11 @@ createApp({
                     title: { selector: '', attribute: null },
                     url: { selector: '', attribute: 'href' },
                     date: { selector: '', attribute: null, optional: true }
+                },
+                deepSearch: {
+                    enabled: false,
+                    selector: '',
+                    attribute: 'href'
                 }
             }
         };
@@ -53,27 +58,20 @@ createApp({
             // Try loading from localStorage first
             const stored = localStorage.getItem('the-eye-sites');
             if (stored) {
-                sites.value = JSON.parse(stored);
-            } else {
-                // Initialize with some dummy data if empty
-                sites.value = [
-                    {
-                        id: 'boe-example',
-                        name: 'BOE Example',
-                        enabled: true,
-                        url: 'https://boe.es',
-                        checkInterval: '*/30 * * * *',
-                        steps: [{ action: 'click', selector: '#cookies' }],
-                        extraction: {
-                            listSelector: '.item',
-                            fields: {
-                                title: { selector: 'h3', attribute: null },
-                                url: { selector: 'a', attribute: 'href' },
-                                date: { selector: '.date', attribute: null, optional: true }
-                            }
-                        }
+                const parsed = JSON.parse(stored);
+                // Migrate sites to include deepSearch if missing
+                sites.value = parsed.map(site => {
+                    if (!site.extraction) {
+                        site.extraction = { listSelector: '', fields: {}, deepSearch: { enabled: false, selector: '', attribute: 'href' } };
                     }
-                ];
+                    if (!site.extraction.deepSearch) {
+                        site.extraction.deepSearch = { enabled: false, selector: '', attribute: 'href' };
+                    }
+                    return site;
+                });
+            } else {
+                // Initialize with empty array
+                sites.value = [];
             }
         };
 

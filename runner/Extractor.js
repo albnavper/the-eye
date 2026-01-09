@@ -179,6 +179,61 @@ export class Extractor {
 
         return `${titlePart}::${urlPart}`.substring(0, 200);
     }
+
+    /**
+     * Resolve deep links - navigate to intermediate pages to find real download URLs
+     * @param {import('playwright').Page} page - Playwright page
+     * @param {Array} documents - Documents with intermediate URLs
+     * @param {Object} deepSearchConfig - Deep search configuration
+     * @returns {Promise<Array>} Documents with resolved final URLs
+     */
+    async resolveDeepLinks(page, documents, deepSearchConfig) {
+        if (!deepSearchConfig?.enabled) {
+            return documents;
+        }
+
+        const { selector, attribute = 'href' } = deepSearchConfig;
+        console.log(`  🔍 Deep Search: Resolving ${documents.length} intermediate URLs...`);
+
+        const resolvedDocs = [];
+
+        for (const doc of documents) {
+            try {
+                console.log(`    → Navigating to: ${doc.url}`);
+
+                // Navigate to intermediate page
+                await page.goto(doc.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+
+                // Wait for the target element
+                await page.waitForSelector(selector, { timeout: 10000 });
+
+                // Extract the real URL
+                const realUrl = await page.$eval(selector, (el, attr) => {
+                    const val = el.getAttribute(attr);
+                    if (!val) return null;
+                    return new URL(val, document.baseURI).href;
+                }, attribute);
+
+                if (realUrl) {
+                    console.log(`    ✓ Found real URL: ${realUrl.substring(0, 60)}...`);
+                    resolvedDocs.push({
+                        ...doc,
+                        intermediateUrl: doc.url, // Keep original for reference
+                        url: realUrl              // Replace with final URL
+                    });
+                } else {
+                    console.log(`    ⚠ No URL found with selector: ${selector}`);
+                    resolvedDocs.push(doc); // Keep original
+                }
+            } catch (error) {
+                console.log(`    ⚠ Deep search failed for ${doc.title}: ${error.message}`);
+                resolvedDocs.push(doc); // Keep original on error
+            }
+        }
+
+        console.log(`  🔍 Deep Search complete: ${resolvedDocs.filter(d => d.intermediateUrl).length} URLs resolved`);
+        return resolvedDocs;
+    }
 }
 
 export default Extractor;

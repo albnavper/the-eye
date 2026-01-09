@@ -50,15 +50,34 @@
         [v-cloak] {
             display: none;
         }
+
+        /* Sidebar responsive */
+        @media (max-width: 768px) {
+            .sidebar-open .sidebar-overlay {
+                display: block;
+            }
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+        }
     </style>
 </head>
 
 <body class="bg-dark text-gray-200 h-screen flex overflow-hidden font-sans">
     <div id="app" v-cloak class="flex w-full h-full">
 
+        <!-- Sidebar Overlay (mobile) -->
+        <div class="sidebar-overlay" :class="{'!block': sidebarOpen}" @click="sidebarOpen = false"></div>
+
         <!-- Sidebar (Uptime Kuma style) -->
-        <aside class="w-80 bg-surface border-r border-gray-700 flex flex-col shrink-0 transition-all duration-300"
-            :class="{'w-0 -translate-x-full': !sidebarOpen}">
+        <aside
+            class="w-80 bg-surface border-r border-gray-700 flex flex-col shrink-0 transition-all duration-300 fixed md:relative h-full z-50"
+            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full md:-translate-x-full w-0'">
             <!-- Header -->
             <div class="p-4 border-b border-gray-700 flex items-center justify-between">
                 <h1 class="text-xl font-bold flex items-center gap-2">
@@ -318,11 +337,44 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Deep Search Section -->
+                    <div class="bg-surface p-4 rounded-lg border border-amber-700/50 mt-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-medium flex items-center gap-2">
+                                <i class="fa-solid fa-arrow-down text-amber-400"></i> Deep Search (Subpáginas)
+                            </h4>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" v-model="activeSite.extraction.deepSearch.enabled"
+                                    class="sr-only peer">
+                                <div
+                                    class="w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-600">
+                                </div>
+                            </label>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-3">Si la URL extraída no es el archivo final, el robot
+                            entrará en esa página y buscará el enlace real.</p>
+
+                        <div v-if="activeSite.extraction.deepSearch.enabled"
+                            class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs text-gray-500">Selector del enlace final</label>
+                                <input v-model="activeSite.extraction.deepSearch.selector" type="text"
+                                    placeholder="a.btn-download"
+                                    class="w-full bg-dark border border-gray-600 rounded px-2 py-1 font-mono text-sm">
+                            </div>
+                            <div>
+                                <label class="text-xs text-gray-500">Atributo (default: href)</label>
+                                <input v-model="activeSite.extraction.deepSearch.attribute" type="text"
+                                    placeholder="href"
+                                    class="w-full bg-dark border border-gray-600 rounded px-2 py-1 font-mono text-sm">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Actions Footer -->
-                <div
-                    class="fixed bottom-0 right-0 left-80 bg-surface/90 backdrop-blur border-t border-gray-700 p-4 flex justify-between items-center z-10">
+                <div class="fixed bottom-0 right-0 bg-surface/90 backdrop-blur border-t border-gray-700 p-4 flex justify-between items-center z-10 transition-all duration-300"
+                    :class="sidebarOpen ? 'left-80 md:left-80' : 'left-0'">
                     <div>
                         <button @click="deleteSite"
                             class="text-red-400 hover:text-red-300 text-sm flex items-center gap-2">
