@@ -52,36 +52,22 @@
         }
 
         /* Sidebar responsive */
-        .sidebar {
-            transition: width 0.3s ease, transform 0.3s ease;
-        }
-
-        .sidebar.collapsed {
-            width: 0;
-            min-width: 0;
-            overflow: hidden;
-        }
-
-        .sidebar.collapsed>* {
-            opacity: 0;
+        .sidebar-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @media (max-width: 768px) {
-            .sidebar {
+            .sidebar-mobile {
                 position: fixed;
                 left: 0;
                 top: 0;
                 height: 100%;
                 z-index: 50;
-            }
-
-            .sidebar.collapsed {
                 transform: translateX(-100%);
-                width: 20rem;
             }
 
-            .sidebar-overlay.active {
-                display: block;
+            .sidebar-mobile.open {
+                transform: translateX(0);
             }
         }
 
@@ -98,63 +84,74 @@
 <body class="bg-dark text-gray-200 h-screen flex overflow-hidden font-sans">
     <div id="app" v-cloak class="flex w-full h-full">
 
-        <!-- Sidebar Overlay (mobile) -->
-        <div class="sidebar-overlay" :class="{'active': sidebarOpen}" @click="sidebarOpen = false"></div>
+        <!-- Sidebar Overlay (mobile only) -->
+        <div v-show="sidebarOpen" class="fixed inset-0 bg-black/50 z-40 md:hidden glass" @click="sidebarOpen = false">
+        </div>
 
-        <!-- Sidebar (Uptime Kuma style) -->
-        <aside class="sidebar w-80 bg-surface border-r border-gray-700 flex flex-col shrink-0"
-            :class="{'collapsed': !sidebarOpen}">
-            <!-- Header -->
-            <div class="p-4 border-b border-gray-700 flex items-center justify-between whitespace-nowrap">
-                <h1 class="text-xl font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-eye text-primary"></i> The Eye
-                </h1>
-                <button @click="createNewSite" class="btn-icon" title="New Site">
-                    <i class="fa-solid fa-plus text-green-400 hover:text-green-300"></i>
-                </button>
-            </div>
+        <!-- Sidebar Container -->
+        <aside class="flex-shrink-0 sidebar-transition h-full z-50 md:relative" :class="[
+                   sidebarOpen ? 'w-80' : 'w-0', 
+                   'sidebar-mobile', 
+                   {'open': sidebarOpen}
+               ]">
 
-            <!-- Search -->
-            <div class="p-3">
-                <div class="relative">
-                    <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                    <input v-model="searchQuery" type="text" placeholder="Search sites..."
-                        class="w-full bg-dark border border-gray-700 rounded-lg py-2 pl-9 pr-3 text-sm focus:outline-none focus:border-primary">
-                </div>
-            </div>
+            <!-- Inner Fixed Width Wrapper -->
+            <div class="w-80 h-full bg-surface border-r border-gray-700 flex flex-col absolute md:static top-0 left-0">
 
-            <!-- Site List -->
-            <div class="flex-1 overflow-y-auto px-2 space-y-1">
-                <div v-if="filteredSites.length === 0" class="text-center py-8 text-gray-500 text-sm">
-                    No sites found
+                <!-- Header -->
+                <div class="p-4 border-b border-gray-700 flex items-center justify-between shrink-0 h-14">
+                    <h1 class="text-xl font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-eye text-primary"></i> The Eye
+                    </h1>
+                    <button @click="createNewSite"
+                        class="btn-icon w-8 h-8 flex items-center justify-center rounded hover:bg-white/5"
+                        title="New Site">
+                        <i class="fa-solid fa-plus text-green-400"></i>
+                    </button>
                 </div>
 
-                <div v-for="site in filteredSites" :key="site.id" @click="selectSite(site)"
-                    class="p-3 rounded-lg cursor-pointer flex items-center gap-3 transition-colors border border-transparent"
-                    :class="activeSiteId === site.id ? 'bg-primary/20 border-primary/50' : 'hover:bg-dark hover:border-gray-700'">
-
-                    <!-- Status Pill -->
-                    <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-                        :class="site.enabled ? 'bg-green-500/20 text-green-400' : 'bg-gray-600/20 text-gray-400'">
-                        <i class="fa-solid" :class="site.enabled ? 'fa-check' : 'fa-pause'"></i>
-                    </div>
-
-                    <!-- Info -->
-                    <div class="min-w-0 flex-1">
-                        <div class="font-medium truncate">{{ site.name }}</div>
-                        <div class="text-xs text-gray-500 truncate">{{ site.url }}</div>
+                <!-- Search -->
+                <div class="p-3 shrink-0">
+                    <div class="relative">
+                        <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                        <input v-model="searchQuery" type="text" placeholder="Search sites..."
+                            class="w-full bg-dark border border-gray-700 rounded-lg py-2 pl-9 pr-3 text-sm focus:outline-none focus:border-primary">
                     </div>
                 </div>
-            </div>
 
-            <!-- Footer -->
-            <div class="p-4 border-t border-gray-700 text-xs text-center text-gray-500 whitespace-nowrap">
-                <button @click="importConfig" class="hover:text-primary mr-3">
-                    <i class="fa-solid fa-file-import"></i> Import
-                </button>
-                <button @click="exportConfig" class="hover:text-primary">
-                    <i class="fa-solid fa-file-export"></i> Export JSON
-                </button>
+                <!-- Site List -->
+                <div class="flex-1 overflow-y-auto px-2 space-y-1 min-h-0">
+                    <div v-if="filteredSites.length === 0" class="text-center py-8 text-gray-500 text-sm">
+                        No sites found
+                    </div>
+
+                    <div v-for="site in filteredSites" :key="site.id" @click="selectSite(site)"
+                        class="p-3 rounded-lg cursor-pointer flex items-center gap-3 transition-colors border border-transparent"
+                        :class="activeSiteId === site.id ? 'bg-primary/20 border-primary/50' : 'hover:bg-dark hover:border-gray-700'">
+
+                        <!-- Status Pill -->
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+                            :class="site.enabled ? 'bg-green-500/20 text-green-400' : 'bg-gray-600/20 text-gray-400'">
+                            <i class="fa-solid" :class="site.enabled ? 'fa-check' : 'fa-pause'"></i>
+                        </div>
+
+                        <!-- Info -->
+                        <div class="min-w-0 flex-1">
+                            <div class="font-medium truncate">{{ site.name }}</div>
+                            <div class="text-xs text-gray-500 truncate">{{ site.url }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="p-4 border-t border-gray-700 text-xs text-center text-gray-500 shrink-0">
+                    <button @click="importConfig" class="hover:text-primary mr-3">
+                        <i class="fa-solid fa-file-import"></i> Import
+                    </button>
+                    <button @click="exportConfig" class="hover:text-primary">
+                        <i class="fa-solid fa-file-export"></i> Export JSON
+                    </button>
+                </div>
             </div>
         </aside>
 
