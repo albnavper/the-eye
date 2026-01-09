@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Eye - Document Monitor</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1e293b',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                        surface: '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-gray-200 h-screen flex overflow-hidden font-sans">
+    <div id="app" v-cloak class="flex w-full h-full">
+
+        <!-- Sidebar (Uptime Kuma style) -->
+        <aside class="w-80 bg-surface border-r border-gray-700 flex flex-col shrink-0 transition-all duration-300"
+            :class="{'w-0 -translate-x-full': !sidebarOpen}">
+            <!-- Header -->
+            <div class="p-4 border-b border-gray-700 flex items-center justify-between">
+                <h1 class="text-xl font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-eye text-primary"></i> The Eye
+                </h1>
+                <button @click="createNewSite" class="btn-icon" title="New Site">
+                    <i class="fa-solid fa-plus text-green-400 hover:text-green-300"></i>
+                </button>
+            </div>
+
+            <!-- Search -->
+            <div class="p-3">
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                    <input v-model="searchQuery" type="text" placeholder="Search sites..."
+                        class="w-full bg-dark border border-gray-700 rounded-lg py-2 pl-9 pr-3 text-sm focus:outline-none focus:border-primary">
+                </div>
+            </div>
+
+            <!-- Site List -->
+            <div class="flex-1 overflow-y-auto px-2 space-y-1">
+                <div v-if="filteredSites.length === 0" class="text-center py-8 text-gray-500 text-sm">
+                    No sites found
+                </div>
+
+                <div v-for="site in filteredSites" :key="site.id" @click="selectSite(site)"
+                    class="p-3 rounded-lg cursor-pointer flex items-center gap-3 transition-colors border border-transparent"
+                    :class="activeSiteId === site.id ? 'bg-primary/20 border-primary/50' : 'hover:bg-dark hover:border-gray-700'">
+
+                    <!-- Status Pill -->
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+                        :class="site.enabled ? 'bg-green-500/20 text-green-400' : 'bg-gray-600/20 text-gray-400'">
+                        <i class="fa-solid" :class="site.enabled ? 'fa-check' : 'fa-pause'"></i>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="min-w-0 flex-1">
+                        <div class="font-medium truncate">{{ site.name }}</div>
+                        <div class="text-xs text-gray-500 truncate">{{ site.url }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="p-4 border-t border-gray-700 text-xs text-center text-gray-500">
+                <button @click="importConfig" class="hover:text-primary mr-3">
+                    <i class="fa-solid fa-file-import"></i> Import
+                </button>
+                <button @click="exportConfig" class="hover:text-primary">
+                    <i class="fa-solid fa-file-export"></i> Export JSON
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col min-w-0 bg-darker">
+            <!-- Top Bar -->
+            <header class="h-14 bg-surface border-b border-gray-700 flex items-center px-4 justify-between">
+                <div class="flex items-center gap-4">
+                    <button @click="sidebarOpen = !sidebarOpen" class="text-gray-400 hover:text-white">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h2 v-if="activeSite" class="font-semibold text-lg">{{ activeSite.name }}</h2>
+                    <h2 v-else class="font-semibold text-lg">Dashboard</h2>
+                </div>
+
+                <div class="flex gap-3">
+                    <a href="https://github.com/albnavper/the-eye" target="_blank"
+                        class="text-gray-400 hover:text-white">
+                        <i class="fa-brands fa-github text-xl"></i>
+                    </a>
+                </div>
+            </header>
+
+            <!-- Editor Area -->
+            <div v-if="activeSite" class="flex-1 overflow-y-auto p-6">
+                <!-- ChangeDetection.io style Tabs -->
+                <div class="flex border-b border-gray-700 mb-6">
+                    <button v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id"
+                        class="px-6 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2"
+                        :class="activeTab === tab.id ? 'border-primary text-primary' : 'border-transparent text-gray-400 hover:text-gray-200'">
+                        <i :class="tab.icon"></i> {{ tab.name }}
+                    </button>
+                </div>
+
+                <!-- Tab: General -->
+                <div v-show="activeTab === 'general'" class="max-w-4xl animate-fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="col-span-2">
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Site Name</label>
+                            <input v-model="activeSite.name" type="text"
+                                class="w-full bg-surface border border-gray-600 rounded-lg px-4 py-2 focus:border-primary focus:outline-none">
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-sm font-medium text-gray-400 mb-1">URL</label>
+                            <div class="flex gap-2">
+                                <input v-model="activeSite.url" type="url"
+                                    class="w-full bg-surface border border-gray-600 rounded-lg px-4 py-2 focus:border-primary focus:outline-none">
+                                <a :href="activeSite.url" target="_blank"
+                                    class="px-3 py-2 bg-surface border border-gray-600 rounded-lg hover:bg-gray-700">
+                                    <i class="fa-solid fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Cron Schedule</label>
+                            <input v-model="activeSite.checkInterval" type="text" placeholder="*/30 * * * *"
+                                class="w-full bg-surface border border-gray-600 rounded-lg px-4 py-2 focus:border-primary focus:outline-none">
+                            <p class="text-xs text-gray-500 mt-1">Default: */30 * * * * (Every 30 mins)</p>
+                        </div>
+                        <div class="flex items-center pt-6">
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" v-model="activeSite.enabled" class="sr-only peer">
+                                <div
+                                    class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600">
+                                </div>
+                                <span class="ml-3 text-sm font-medium text-gray-300">Enabled</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Steps -->
+                <div v-show="activeTab === 'steps'" class="max-w-4xl space-y-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium">Browser Navigation Steps</h3>
+                        <button @click="addStep"
+                            class="btn-sm bg-primary hover:bg-blue-600 text-white px-3 py-1 rounded">
+                            <i class="fa-solid fa-plus"></i> Add Step
+                        </button>
+                    </div>
+
+                    <div v-if="!activeSite.steps || activeSite.steps.length === 0"
+                        class="text-center py-10 bg-surface rounded-lg border border-dashed border-gray-600">
+                        <p class="text-gray-400">No navigation steps configured.</p>
+                        <p class="text-sm text-gray-500">Add steps to click buttons, fill forms, or wait for elements.
+                        </p>
+                    </div>
+
+                    <div v-for="(step, index) in activeSite.steps" :key="index"
+                        class="bg-surface p-4 rounded-lg border border-gray-700 flex gap-4 items-start group">
+                        <div class="mt-2 text-gray-500 font-mono text-sm w-6">{{ index + 1 }}</div>
+
+                        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-xs text-gray-500 uppercase">Action</label>
+                                <select v-model="step.action"
+                                    class="w-full bg-dark border border-gray-600 rounded px-2 py-1 text-sm">
+                                    <option value="click">Click Element</option>
+                                    <option value="waitForSelector">Wait For Selector</option>
+                                    <option value="fill">Fill Input</option>
+                                    <option value="wait">Wait (Time)</option>
+                                    <option value="wait_ajax">Wait for Network Idle</option>
+                                    <option value="scroll">Scroll</option>
+                                </select>
+                            </div>
+
+                            <!-- Dynamic fields based on action -->
+                            <div v-if="['click', 'waitForSelector', 'fill', 'scroll'].includes(step.action)">
+                                <label class="text-xs text-gray-500 uppercase">CSS Selector</label>
+                                <input v-model="step.selector" type="text" placeholder=".class or #id"
+                                    class="w-full bg-dark border border-gray-600 rounded px-2 py-1 text-sm font-mono">
+                            </div>
+
+                            <div v-if="step.action === 'fill'">
+                                <label class="text-xs text-gray-500 uppercase">Value</label>
+                                <input v-model="step.value" type="text"
+                                    class="w-full bg-dark border border-gray-600 rounded px-2 py-1 text-sm">
+                            </div>
+
+                            <div v-if="step.action === 'wait'">
+                                <label class="text-xs text-gray-500 uppercase">Duration (ms)</label>
+                                <input v-model="step.duration" type="number" step="1000"
+                                    class="w-full bg-dark border border-gray-600 rounded px-2 py-1 text-sm">
+                            </div>
+
+                            <div class="col-span-2 flex items-center gap-4">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" v-model="step.optional"
+                                        class="rounded bg-dark border-gray-600">
+                                    <span class="text-xs text-gray-400">Optional (continue if fails)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button @click="removeStep(index)"
+                            class="text-gray-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab: Extraction -->
+                <div v-show="activeTab === 'extraction'" class="max-w-4xl space-y-6">
+                    <div class="bg-surface p-4 rounded-lg border border-gray-700">
+                        <label class="block text-sm font-medium text-primary mb-2">List Selector (Container)</label>
+                        <p class="text-xs text-gray-500 mb-2">The CSS selector that identifies the list of documents
+                            (e.g. <code>.results-list .item</code>)</p>
+                        <input v-model="activeSite.extraction.listSelector" type="text"
+                            class="w-full bg-dark border border-gray-600 rounded px-3 py-2 font-mono text-sm focus:border-primary focus:outline-none">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Title Field -->
+                        <div class="bg-surface p-4 rounded-lg border border-gray-700">
+                            <h4 class="font-medium mb-3 flex items-center gap-2"><i
+                                    class="fa-solid fa-heading text-blue-400"></i> Title</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="text-xs text-gray-500">Selector (relative)</label>
+                                    <input v-model="activeSite.extraction.fields.title.selector" type="text"
+                                        class="w-full bg-dark border border-gray-600 rounded px-2 py-1 font-mono text-sm">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-gray-500">Attribute (empty = text)</label>
+                                    <input v-model="activeSite.extraction.fields.title.attribute" type="text"
+                                        placeholder="innerText"
+                                        class="w-full bg-dark border border-gray-600 rounded px-2 py-1 font-mono text-sm">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- URL Field -->
+                        <div class="bg-surface p-4 rounded-lg border border-gray-700">
+                            <h4 class="font-medium mb-3 flex items-center gap-2"><i
+                                    class="fa-solid fa-link text-green-400"></i> URL</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="text-xs text-gray-500">Selector (relative)</label>
+                                    <input v-model="activeSite.extraction.fields.url.selector" type="text"
+                                        class="w-full bg-dark border border-gray-600 rounded px-2 py-1 font-mono text-sm">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-gray-500">Attribute</label>
+                                    <input v-model="activeSite.extraction.fields.url.attribute" type="text"
+                                        placeholder="href"
+                                        class="w-full bg-dark border border-gray-600 rounded px-2 py-1 font-mono text-sm">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Date Field -->
+                        <div class="bg-surface p-4 rounded-lg border border-gray-700">
+                            <h4 class="font-medium mb-3 flex items-center gap-2"><i
+                                    class="fa-solid fa-calendar text-yellow-400"></i> Date</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="text-xs text-gray-500">Selector (relative)</label>
+                                    <input v-model="activeSite.extraction.fields.date.selector" type="text"
+                                        class="w-full bg-dark border border-gray-600 rounded px-2 py-1 font-mono text-sm">
+                                </div>
+                                <label class="flex items-center gap-2 cursor-pointer mt-2">
+                                    <input type="checkbox" v-model="activeSite.extraction.fields.date.optional"
+                                        class="rounded bg-dark border-gray-600">
+                                    <span class="text-xs text-gray-400">Optional</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions Footer -->
+                <div
+                    class="fixed bottom-0 right-0 left-80 bg-surface/90 backdrop-blur border-t border-gray-700 p-4 flex justify-between items-center z-10">
+                    <div>
+                        <button @click="deleteSite"
+                            class="text-red-400 hover:text-red-300 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-trash"></i> Delete Site
+                        </button>
+                    </div>
+                    <div class="flex gap-3">
+                        <button @click="saveChanges" class="px-4 py-2 text-gray-300 hover:text-white">Save
+                            Locally</button>
+                        <button @click="publishChanges"
+                            class="px-4 py-2 bg-primary hover:bg-blue-600 text-white rounded-lg flex items-center gap-2 shadow-lg shadow-blue-500/20">
+                            <i class="fa-solid fa-cloud-upload"></i> Publish Changes
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div v-else class="flex-1 flex flex-col items-center justify-center text-gray-500">
+                <i class="fa-solid fa-eye text-6xl mb-4 text-gray-700"></i>
+                <h3 class="text-xl font-medium text-gray-300">Welcome to The Eye</h3>
+                <p class="mb-6">Select a site to edit or create a new one.</p>
+                <button @click="createNewSite"
+                    class="btn-primary px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-600 transition">
+                    Create New Monitor
+                </button>
+            </div>
+        </main>
+
+        <!-- Publish Logic (Export Modal would go here, doing simple alert for now) -->
+
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

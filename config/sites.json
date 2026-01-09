@@ -1,0 +1,7 @@
+{
+    "sites": [],
+    "telegram": {
+        "botToken": "${TELEGRAM_BOT_TOKEN}",
+        "chatId": "${TELEGRAM_CHAT_ID}"
+    }
+}

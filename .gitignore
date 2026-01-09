@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Downloads (temporary files)
+downloads/
+
+# State (managed in separate branch)
+state/
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test outputs
+test-results/
+playwright-report/

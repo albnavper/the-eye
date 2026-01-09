@@ -1,0 +1,103 @@
+{
+    "sites": [
+        {
+            "id": "boe-ayudas",
+            "name": "BOE Ayudas",
+            "enabled": true,
+            "checkInterval": "*/30 * * * *",
+            "url": "https://www.boe.es/diario_boe/",
+            "steps": [
+                {
+                    "action": "click",
+                    "selector": "#acceptCookies",
+                    "optional": true,
+                    "timeout": 3000
+                },
+                {
+                    "action": "waitForSelector",
+                    "selector": ".sumario",
+                    "timeout": 10000
+                }
+            ],
+            "extraction": {
+                "listSelector": ".sumario .dispo",
+                "fields": {
+                    "title": {
+                        "selector": "p.documento",
+                        "attribute": null
+                    },
+                    "url": {
+                        "selector": "a[href$='.pdf']",
+                        "attribute": "href"
+                    },
+                    "date": {
+                        "selector": ".fecha",
+                        "attribute": null,
+                        "optional": true
+                    }
+                }
+            },
+            "retries": 2,
+            "downloadTimeout": 30000
+        },
+        {
+            "id": "example-with-form",
+            "name": "Example with Form Navigation",
+            "enabled": false,
+            "checkInterval": "0 */6 * * *",
+            "url": "https://example.gov/search",
+            "steps": [
+                {
+                    "action": "click",
+                    "selector": "#cookieAccept",
+                    "optional": true
+                },
+                {
+                    "action": "fill",
+                    "selector": "#searchInput",
+                    "value": "convocatoria"
+                },
+                {
+                    "action": "click",
+                    "selector": "button[type='submit']"
+                },
+                {
+                    "action": "wait_ajax",
+                    "timeout": 5000
+                },
+                {
+                    "action": "waitForSelector",
+                    "selector": ".results-list"
+                }
+            ],
+            "extraction": {
+                "listSelector": ".results-list .result-item",
+                "fields": {
+                    "title": {
+                        "selector": "h3 a",
+                        "attribute": null
+                    },
+                    "url": {
+                        "selector": "a.download-pdf",
+                        "attribute": "href"
+                    },
+                    "date": {
+                        "selector": ".pub-date",
+                        "attribute": null,
+                        "optional": true
+                    }
+                }
+            },
+            "retries": 3
+        }
+    ],
+    "telegram": {
+        "botToken": "${TELEGRAM_BOT_TOKEN}",
+        "chatId": "${TELEGRAM_CHAT_ID}"
+    },
+    "defaults": {
+        "timeout": 30000,
+        "retries": 2,
+        "checkInterval": "*/30 * * * *"
+    }
+}

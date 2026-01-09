@@ -1,0 +1,27 @@
+{
+  "name": "the-eye",
+  "version": "1.0.0",
+  "description": "Government document monitor with Playwright navigation and Telegram notifications",
+  "type": "module",
+  "main": "runner/index.js",
+  "scripts": {
+    "start": "node runner/index.js",
+    "dry-run": "node runner/index.js --dry-run",
+    "test": "node runner/index.js --dry-run --site-id=test"
+  },
+  "keywords": [
+    "monitor",
+    "playwright",
+    "telegram",
+    "github-actions"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.40.0",
+    "node-telegram-bot-api": "^0.64.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

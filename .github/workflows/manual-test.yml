@@ -1,0 +1,81 @@
+# Manual Test Workflow (Dry Run)
+# Test site configuration without saving state
+
+name: Manual Test (Dry Run)
+
+on:
+  workflow_dispatch:
+    inputs:
+      config_json:
+        description: 'Site configuration JSON (single site)'
+        required: true
+        type: string
+      send_telegram:
+        description: 'Send test notification to Telegram'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium
+      
+      - name: Validate JSON input
+        id: validate
+        run: |
+          echo '${{ inputs.config_json }}' | jq . > /dev/null 2>&1
+          if [ $? -ne 0 ]; then
+            echo "::error::Invalid JSON input"
+            exit 1
+          fi
+          echo "JSON is valid"
+      
+      - name: Run dry-run test
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          ARGS="--dry-run"
+          if [ "${{ inputs.send_telegram }}" = "true" ]; then
+            ARGS="$ARGS --notify"
+          fi
+          
+          # Use a temp file to avoid shell escaping issues
+          echo '${{ inputs.config_json }}' > /tmp/test-config.json
+          CONFIG=$(cat /tmp/test-config.json)
+          
+          node runner/index.js $ARGS --config-json="$CONFIG"
+      
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-screenshots
+          path: |
+            downloads/*.png
+            downloads/*.html
+          retention-days: 1
+          if-no-files-found: ignore

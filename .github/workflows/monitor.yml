@@ -1,0 +1,125 @@
+# Main Monitor Workflow
+# Runs on schedule and processes all enabled sites
+
+name: Document Monitor
+
+on:
+  schedule:
+    # Run every 30 minutes at offset minutes to avoid peak times
+    - cron: '7,37 * * * *'
+  
+  workflow_dispatch:
+    inputs:
+      site_id:
+        description: 'Specific site ID to process (leave empty for all)'
+        required: false
+        type: string
+      dry_run:
+        description: 'Dry run mode (no state changes)'
+        required: false
+        type: boolean
+        default: false
+
+# Ensure only one instance writes to state at a time
+concurrency:
+  group: monitor-state
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Checkout state branch
+        run: |
+          git fetch origin state:state 2>/dev/null || echo "State branch doesn't exist yet"
+          if git show-ref --verify --quiet refs/heads/state; then
+            git checkout state -- state/ 2>/dev/null || true
+          fi
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium
+      
+      - name: Run monitor
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          ARGS=""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run --notify"
+          fi
+          if [ -n "${{ inputs.site_id }}" ]; then
+            ARGS="$ARGS --site-id=${{ inputs.site_id }}"
+          fi
+          node runner/index.js $ARGS
+      
+      - name: Commit state changes
+        if: ${{ inputs.dry_run != 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Create state branch if it doesn't exist
+          if ! git show-ref --verify --quiet refs/heads/state; then
+            git checkout --orphan state
+            git reset --hard
+            mkdir -p state
+            echo '{"version":1,"sites":{}}' > state/state.json
+            git add state/
+            git commit -m "Initialize state branch"
+            git push -u origin state
+            git checkout -
+          fi
+          
+          # Check if state directory has changes
+          if [ -d "state" ] && [ -n "$(ls -A state 2>/dev/null)" ]; then
+            # Pull latest state with rebase
+            git stash push -- state/ 2>/dev/null || true
+            git fetch origin state
+            git checkout state
+            git pull --rebase origin state || true
+            git stash pop 2>/dev/null || true
+            
+            # Commit and push
+            git add state/
+            if git diff --staged --quiet; then
+              echo "No state changes to commit"
+            else
+              git commit -m "Update state: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              git push origin state
+            fi
+          fi
+      
+      - name: Upload error screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: error-screenshots
+          path: downloads/*.png
+          retention-days: 3
+          if-no-files-found: ignore
