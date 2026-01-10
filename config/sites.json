@@ -69,6 +69,85 @@
             },
             "timeout": 30000,
             "retries": 2
+        },
+        {
+            "id": "dipusevilla-bomberos",
+            "name": "Diputación Sevilla - Bomberos '19",
+            "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede",
+            "enabled": true,
+            "steps": [
+                {
+                    "action": "wait",
+                    "value": 3000
+                },
+                {
+                    "action": "evaluate",
+                    "script": "const cb = document.querySelector('#checkAviso'); if(cb) cb.click();"
+                },
+                {
+                    "action": "wait",
+                    "value": 500
+                },
+                {
+                    "action": "evaluate",
+                    "script": "const btn = document.querySelector('a.cerrar'); if(btn) btn.click();"
+                },
+                {
+                    "action": "wait",
+                    "value": 1000
+                },
+                {
+                    "action": "click",
+                    "selector": "#search-box"
+                },
+                {
+                    "action": "type",
+                    "selector": "#search-box",
+                    "value": "bombero"
+                },
+                {
+                    "action": "press",
+                    "key": "Enter"
+                },
+                {
+                    "action": "wait_ajax"
+                },
+                {
+                    "action": "wait",
+                    "value": 3000
+                },
+                {
+                    "action": "evaluate",
+                    "script": "const links = document.querySelectorAll('a'); for(let a of links) { if(a.textContent.includes('BOMBERO') && a.textContent.includes('19')) { a.click(); break; } }"
+                },
+                {
+                    "action": "wait_ajax"
+                },
+                {
+                    "action": "wait",
+                    "value": 3000
+                }
+            ],
+            "extraction": {
+                "listSelector": "div.tramites a[href*='.pdf']",
+                "fields": {
+                    "title": {
+                        "selector": ".",
+                        "attribute": null
+                    },
+                    "url": {
+                        "selector": ".",
+                        "attribute": "href"
+                    }
+                },
+                "deepSearch": {
+                    "enabled": false,
+                    "selector": "",
+                    "attribute": "href"
+                }
+            },
+            "timeout": 45000,
+            "retries": 2
         }
     ],
     "telegram": {

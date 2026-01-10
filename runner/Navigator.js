@@ -87,6 +87,12 @@ export class Navigator {
         await page.fill(step.selector, step.value, { timeout });
         break;
 
+      case 'type':
+        // Type character by character (triggers input events for autocomplete)
+        await page.click(step.selector, { timeout });
+        await page.type(step.selector, step.value, { delay: step.delay || 50 });
+        break;
+
       case 'press':
         if (step.selector) {
           await page.press(step.selector, step.key, { timeout });
