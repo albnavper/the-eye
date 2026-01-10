@@ -197,7 +197,7 @@
                 },
                 {
                     "action": "evaluate",
-                    "script": "const links = document.querySelectorAll('a'); for(let a of links) { if(a.textContent.includes('BOMBERO') && a.textContent.includes('2020') && a.textContent.includes('2021')) { a.click(); break; } }"
+                    "script": "const links = document.querySelectorAll('a'); for(let a of links) { if(a.textContent.includes('OEP') && a.textContent.includes('2020') && a.textContent.includes('2021')) { a.click(); break; } }"
                 },
                 {
                     "action": "wait_ajax"
