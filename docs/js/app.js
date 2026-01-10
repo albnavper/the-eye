@@ -63,6 +63,19 @@ createApp({
             if (!site.extraction) {
                 site.extraction = { listSelector: '', fields: {}, deepSearch: { enabled: false, selector: '', attribute: 'href' } };
             }
+            if (!site.extraction.fields) {
+                site.extraction.fields = {};
+            }
+            // Ensure all required fields exist
+            if (!site.extraction.fields.title) {
+                site.extraction.fields.title = { selector: '', attribute: null };
+            }
+            if (!site.extraction.fields.url) {
+                site.extraction.fields.url = { selector: '', attribute: 'href' };
+            }
+            if (!site.extraction.fields.date) {
+                site.extraction.fields.date = { selector: '', attribute: null, optional: true };
+            }
             if (!site.extraction.deepSearch) {
                 site.extraction.deepSearch = { enabled: false, selector: '', attribute: 'href' };
             }
