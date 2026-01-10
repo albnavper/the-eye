@@ -231,8 +231,12 @@ async function processSite(site, browser, stateManager, notifier, args) {
 
                 // Send to Telegram
                 if (shouldNotify) {
-                    await notifier.notifyNewDocument(site.name, doc, download.path);
-                    console.log(`    ✓ Sent to Telegram`);
+                    try {
+                        await notifier.notifyNewDocument(site.name, doc, download.path);
+                        console.log(`    ✓ Sent to Telegram`);
+                    } catch (telegramErr) {
+                        console.log(`    ⚠️ Telegram failed: ${telegramErr.message}`);
+                    }
                 }
 
                 // Cleanup downloaded file
@@ -244,7 +248,9 @@ async function processSite(site, browser, stateManager, notifier, args) {
 
                 if (shouldNotify) {
                     // Still notify about the new document, without file
-                    await notifier.notifyNewDocument(site.name, doc, null);
+                    try {
+                        await notifier.notifyNewDocument(site.name, doc, null);
+                    } catch { /* ignore telegram errors */ }
                 }
             }
         }
@@ -264,8 +270,12 @@ async function processSite(site, browser, stateManager, notifier, args) {
 
                 // Send to Telegram
                 if (shouldNotify) {
-                    await notifier.notifyUpdatedDocument(site.name, doc, download.path, reason);
-                    console.log(`    ✓ Sent to Telegram`);
+                    try {
+                        await notifier.notifyUpdatedDocument(site.name, doc, download.path, reason);
+                        console.log(`    ✓ Sent to Telegram`);
+                    } catch (telegramErr) {
+                        console.log(`    ⚠️ Telegram failed: ${telegramErr.message}`);
+                    }
                 }
 
                 // Cleanup
@@ -276,7 +286,9 @@ async function processSite(site, browser, stateManager, notifier, args) {
                 console.log(`    ✗ Download failed: ${error.message}`);
 
                 if (shouldNotify) {
-                    await notifier.notifyUpdatedDocument(site.name, doc, null, reason);
+                    try {
+                        await notifier.notifyUpdatedDocument(site.name, doc, null, reason);
+                    } catch { /* ignore telegram errors */ }
                 }
             }
         }
@@ -330,16 +342,20 @@ async function processSite(site, browser, stateManager, notifier, args) {
         const shouldNotify = !args.dryRun || args.notify;
         if (shouldNotify && !isDuplicate) {
             const currentError = stateManager.getLastError(site.id);
-            await notifier.notifyError(site.name, error, {
-                url: site.url,
-                siteId: site.id,
-                step: error.step,
-                stepIndex: error.stepIndex,
-                totalSteps: site.steps?.length,
-                screenshot,
-                retryCount: site.retries || 2,
-                consecutiveCount: currentError?.consecutiveCount,
-            });
+            try {
+                await notifier.notifyError(site.name, error, {
+                    url: site.url,
+                    siteId: site.id,
+                    step: error.step,
+                    stepIndex: error.stepIndex,
+                    totalSteps: site.steps?.length,
+                    screenshot,
+                    retryCount: site.retries || 2,
+                    consecutiveCount: currentError?.consecutiveCount,
+                });
+            } catch (telegramError) {
+                console.error(`  ⚠️  Failed to send Telegram notification: ${telegramError.message}`);
+            }
         } else if (isDuplicate) {
             const count = stateManager.getLastError(site.id)?.consecutiveCount || 1;
             console.log(`  ⏭️  Error duplicado (${count}x consecutivo), notificación omitida`);
