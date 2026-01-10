@@ -242,6 +242,17 @@ createApp({
             input.click();
         };
 
+        // Test Telegram connection via GitHub Actions dispatch
+        const testTelegram = async () => {
+            // Option 1: Direct link to manually trigger workflow
+            const repoUrl = 'https://github.com/albnavper/the-eye';
+            const workflowUrl = `${repoUrl}/actions/workflows/test-telegram.yml`;
+
+            if (confirm('Para testear Telegram:\n\n1. Se abrirá GitHub Actions\n2. Click en "Run workflow"\n3. Confirmar\n\n¿Abrir GitHub Actions?')) {
+                window.open(workflowUrl, '_blank');
+            }
+        };
+
         // Initialize
         onMounted(() => {
             loadSites();
@@ -275,7 +286,8 @@ createApp({
             publishChanges,
             exportConfig,
             importConfig,
-            syncFromRepo
+            syncFromRepo,
+            testTelegram
         };
     }
 }).mount('#app');

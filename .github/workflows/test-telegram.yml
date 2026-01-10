@@ -1,0 +1,67 @@
+# Test Telegram Workflow
+# Sends a test notification to verify Telegram integration
+
+name: Test Telegram
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Custom test message (optional)'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Send test notification
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          CUSTOM_MESSAGE: ${{ inputs.message }}
+        run: |
+          node -e "
+          import('./runner/TelegramNotifier.js').then(({ TelegramNotifier }) => {
+            const notifier = new TelegramNotifier({
+              botToken: process.env.TELEGRAM_BOT_TOKEN,
+              chatId: process.env.TELEGRAM_CHAT_ID
+            });
+            
+            if (!notifier.isConfigured()) {
+              console.error('Telegram not configured!');
+              process.exit(1);
+            }
+            
+            const timestamp = new Date().toLocaleString('es-ES', { 
+              timeZone: 'Europe/Madrid',
+              dateStyle: 'short',
+              timeStyle: 'medium'
+            });
+            
+            const customMsg = process.env.CUSTOM_MESSAGE;
+            const message = customMsg 
+              ? '🧪 <b>Test Message</b>\\n\\n' + customMsg
+              : '🧪 <b>The Eye - Test de Conexión</b>\\n━━━━━━━━━━━━━━━━━━━━━━\\n\\n✅ <b>Estado:</b> Conectado correctamente\\n⏰ <b>Hora:</b> ' + timestamp + '\\n🔧 <b>Trigger:</b> workflow_dispatch\\n\\n<i>Si ves este mensaje, las notificaciones de Telegram funcionan correctamente.</i>';
+            
+            notifier.sendMessage(message).then(() => {
+              console.log('✓ Test notification sent successfully!');
+            }).catch(err => {
+              console.error('✗ Failed to send:', err.message);
+              process.exit(1);
+            });
+          });
+          "
