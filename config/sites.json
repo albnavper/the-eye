@@ -227,6 +227,54 @@
             },
             "timeout": 45000,
             "retries": 2
+        },
+        {
+            "id": "moron-bomberos",
+            "name": "Morón de la Frontera - Bomberos",
+            "url": "https://morondelafrontera.sedelectronica.es/board",
+            "enabled": true,
+            "steps": [
+                {
+                    "action": "wait",
+                    "value": 2000
+                },
+                {
+                    "action": "fill",
+                    "selector": "input.field.c-field__input",
+                    "value": "bombero"
+                },
+                {
+                    "action": "click",
+                    "selector": "button.c-button.c-button-b"
+                },
+                {
+                    "action": "wait_ajax"
+                },
+                {
+                    "action": "wait",
+                    "value": 2000
+                }
+            ],
+            "extraction": {
+                "listSelector": "a.gIconLink",
+                "fields": {
+                    "title": {
+                        "selector": ".",
+                        "attribute": "title"
+                    },
+                    "url": {
+                        "selector": ".",
+                        "attribute": "href"
+                    }
+                },
+                "deepSearch": {
+                    "enabled": false,
+                    "selector": "",
+                    "attribute": "href"
+                }
+            },
+            "timeout": 30000,
+            "retries": 2
         }
     ],
     "telegram": {
