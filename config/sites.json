@@ -275,6 +275,124 @@
             },
             "timeout": 30000,
             "retries": 2
+        },
+        {
+            "id": "cbpc-licitaciones",
+            "name": "CBPC - Licitaciones",
+            "url": "https://contrataciondelestado.es/wps/portal/plataforma/buscadores",
+            "enabled": true,
+            "steps": [
+                {
+                    "action": "wait",
+                    "value": 3000
+                },
+                {
+                    "action": "evaluate",
+                    "script": "document.getElementById('viewns_Z7_AVEQAI930OBRD02JPMTPG21004_:form1:linkFormularioBusqueda').click();"
+                },
+                {
+                    "action": "wait",
+                    "value": 2000
+                },
+                {
+                    "action": "evaluate",
+                    "script": "const input = document.getElementById('viewns_Z7_AVEQAI930OBRD02JPMTPG21004_:form1:texoorganoMAQ'); if(input) { input.value = 'Presidencia del Consorcio de Bomberos de la Provincia de Cádiz'; }"
+                },
+                {
+                    "action": "evaluate",
+                    "script": "document.getElementById('viewns_Z7_AVEQAI930OBRD02JPMTPG21004_:form1:button1Arriba').click();"
+                },
+                {
+                    "action": "wait",
+                    "value": 20000
+                },
+                {
+                    "action": "wait_ajax"
+                },
+                {
+                    "action": "wait",
+                    "value": 5000
+                }
+            ],
+            "extraction": {
+                "listSelector": "a[id*='enlaceExpediente']",
+                "fields": {
+                    "title": {
+                        "selector": ".",
+                        "attribute": null
+                    },
+                    "url": {
+                        "selector": ".",
+                        "attribute": null
+                    }
+                },
+                "deepSearch": {
+                    "enabled": false,
+                    "selector": "",
+                    "attribute": "href"
+                }
+            },
+            "timeout": 60000,
+            "retries": 2
+        },
+        {
+            "id": "cbpc-contratos-menores",
+            "name": "CBPC - Contratos Menores",
+            "url": "https://contrataciondelestado.es/wps/portal/plataforma/buscadores",
+            "enabled": true,
+            "steps": [
+                {
+                    "action": "wait",
+                    "value": 3000
+                },
+                {
+                    "action": "evaluate",
+                    "script": "document.getElementById('viewns_Z7_AVEQAI930OBRD02JPMTPG21004_:form1:linkFormularioBusquedaContratosMenores').click();"
+                },
+                {
+                    "action": "wait",
+                    "value": 2000
+                },
+                {
+                    "action": "evaluate",
+                    "script": "const input = document.getElementById('viewns_Z7_AVEQAI930OBRD02JPMTPG21004_:form1:texoorganoMAQ'); if(input) { input.value = 'Presidencia del Consorcio de Bomberos de la Provincia de Cádiz'; }"
+                },
+                {
+                    "action": "evaluate",
+                    "script": "document.getElementById('viewns_Z7_AVEQAI930OBRD02JPMTPG21004_:form1:button1Arriba').click();"
+                },
+                {
+                    "action": "wait",
+                    "value": 20000
+                },
+                {
+                    "action": "wait_ajax"
+                },
+                {
+                    "action": "wait",
+                    "value": 5000
+                }
+            ],
+            "extraction": {
+                "listSelector": "a[id*='enlaceExpediente']",
+                "fields": {
+                    "title": {
+                        "selector": ".",
+                        "attribute": null
+                    },
+                    "url": {
+                        "selector": ".",
+                        "attribute": null
+                    }
+                },
+                "deepSearch": {
+                    "enabled": false,
+                    "selector": "",
+                    "attribute": "href"
+                }
+            },
+            "timeout": 60000,
+            "retries": 2
         }
     ],
     "telegram": {
