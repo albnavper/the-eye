@@ -92,7 +92,7 @@ export class Extractor {
             config = { selector: config, attribute: null };
         }
 
-        const { selector, attribute } = config;
+        const { selector, attribute, property } = config;
 
         // Find the target element
         const target = selector === '.' || selector === ''
@@ -106,7 +106,11 @@ export class Extractor {
 
         // Extract value
         let value;
-        if (attribute === 'href' || attribute === 'src') {
+
+        // Support for JavaScript properties (for web components like wec-download-file)
+        if (property) {
+            value = await target.evaluate((el, prop) => el[prop], property);
+        } else if (attribute === 'href' || attribute === 'src') {
             // Get absolute URL
             value = await target.evaluate((el, attr) => {
                 const val = el.getAttribute(attr);

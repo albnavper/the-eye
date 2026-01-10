@@ -323,7 +323,7 @@
                     },
                     "url": {
                         "selector": ".",
-                        "attribute": null
+                        "attribute": "href"
                     }
                 },
                 "deepSearch": {
@@ -382,7 +382,7 @@
                     },
                     "url": {
                         "selector": ".",
-                        "attribute": null
+                        "attribute": "href"
                     }
                 },
                 "deepSearch": {
@@ -430,7 +430,7 @@
                     },
                     "url": {
                         "selector": ".",
-                        "attribute": "description-document"
+                        "property": "url"
                     }
                 },
                 "deepSearch": {
