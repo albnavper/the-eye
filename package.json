@@ -7,7 +7,10 @@
   "scripts": {
     "start": "node runner/index.js",
     "dry-run": "node runner/index.js --dry-run",
-    "test": "node runner/index.js --dry-run --site-id=test"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "monitor",
@@ -18,10 +21,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "playwright": "^1.40.0",
-    "node-telegram-bot-api": "^0.64.0"
+    "node-telegram-bot-api": "^0.64.0",
+    "playwright": "^1.40.0"
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.5",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.16"
   }
 }
