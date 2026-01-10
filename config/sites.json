@@ -393,6 +393,54 @@
             },
             "timeout": 60000,
             "retries": 2
+        },
+        {
+            "id": "eprinsa-bomberos-33",
+            "name": "EPRINSA - 33 plazas Bombero-Conductor C2",
+            "url": "https://empleo.eprinsa.es/consorcioincendios/empleo?estado=2&pagina=1",
+            "enabled": true,
+            "steps": [
+                {
+                    "action": "wait",
+                    "value": 3000
+                },
+                {
+                    "action": "click",
+                    "selector": "a#collapse-oferta-22978557"
+                },
+                {
+                    "action": "wait",
+                    "value": 2000
+                },
+                {
+                    "action": "click",
+                    "selector": "a[data-target='#noticeCollapse22978557']"
+                },
+                {
+                    "action": "wait",
+                    "value": 2000
+                }
+            ],
+            "extraction": {
+                "listSelector": "#noticeCollapse22978557 wec-download-file",
+                "fields": {
+                    "title": {
+                        "selector": ".",
+                        "attribute": "description-document"
+                    },
+                    "url": {
+                        "selector": ".",
+                        "attribute": "description-document"
+                    }
+                },
+                "deepSearch": {
+                    "enabled": false,
+                    "selector": "",
+                    "attribute": "href"
+                }
+            },
+            "timeout": 30000,
+            "retries": 2
         }
     ],
     "telegram": {
