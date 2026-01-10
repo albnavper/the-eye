@@ -131,6 +131,25 @@ async function withRetry(fn, retries = 2, baseDelay = 1000) {
     throw lastError;
 }
 
+// Create a fingerprint for error deduplication
+function createErrorFingerprint(error, stepInfo = null) {
+    const parts = [
+        error.name || 'Error',
+        error.message,
+        stepInfo?.action || '',
+        stepInfo?.selector || '',
+    ];
+    // Simple hash: join parts and create a short hash
+    const str = parts.join('|');
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return Math.abs(hash).toString(16);
+}
+
 // Process a single site
 async function processSite(site, browser, stateManager, notifier, args) {
     console.log(`\n${'='.repeat(60)}`);
@@ -273,6 +292,9 @@ async function processSite(site, browser, stateManager, notifier, args) {
             stateManager.updateSiteState(site.id, allDocs);
         }
 
+        // Clear any previous error state since this run succeeded
+        stateManager.clearLastError(site.id);
+
         await context.close();
 
         return {
@@ -292,13 +314,35 @@ async function processSite(site, browser, stateManager, notifier, args) {
             screenshot = await page.screenshot({ fullPage: true });
         } catch { }
 
-        // Send error notification
-        if (!args.dryRun || args.notify) {
+        // Generate error fingerprint for deduplication
+        const errorFingerprint = createErrorFingerprint(error, error.step);
+        const lastError = stateManager.getLastError(site.id);
+        const isDuplicate = lastError?.fingerprint === errorFingerprint;
+
+        // Store the error (even if duplicate, to update count)
+        stateManager.setLastError(site.id, {
+            fingerprint: errorFingerprint,
+            message: error.message,
+            step: error.step,
+        });
+
+        // Only send notification if error is new/different
+        const shouldNotify = !args.dryRun || args.notify;
+        if (shouldNotify && !isDuplicate) {
+            const currentError = stateManager.getLastError(site.id);
             await notifier.notifyError(site.name, error, {
                 url: site.url,
+                siteId: site.id,
                 step: error.step,
+                stepIndex: error.stepIndex,
+                totalSteps: site.steps?.length,
                 screenshot,
+                retryCount: site.retries || 2,
+                consecutiveCount: currentError?.consecutiveCount,
             });
+        } else if (isDuplicate) {
+            const count = stateManager.getLastError(site.id)?.consecutiveCount || 1;
+            console.log(`  ⏭️  Error duplicado (${count}x consecutivo), notificación omitida`);
         }
 
         await context.close();

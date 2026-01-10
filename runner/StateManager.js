@@ -164,6 +164,45 @@ export class StateManager {
     }
 
     /**
+     * Get the last error fingerprint for a site
+     * @param {string} siteId 
+     * @returns {Object|null} Error info with fingerprint, message, timestamp
+     */
+    getLastError(siteId) {
+        const siteState = this.getSiteState(siteId);
+        return siteState.lastError || null;
+    }
+
+    /**
+     * Set the last error for a site (to detect duplicates)
+     * @param {string} siteId 
+     * @param {Object} errorInfo - Error details including fingerprint
+     */
+    setLastError(siteId, errorInfo) {
+        const siteState = this.getSiteState(siteId);
+        siteState.lastError = {
+            fingerprint: errorInfo.fingerprint,
+            message: errorInfo.message,
+            step: errorInfo.step,
+            timestamp: new Date().toISOString(),
+            consecutiveCount: (siteState.lastError?.fingerprint === errorInfo.fingerprint)
+                ? (siteState.lastError.consecutiveCount || 1) + 1
+                : 1,
+        };
+    }
+
+    /**
+     * Clear the last error for a site (called when site succeeds)
+     * @param {string} siteId 
+     */
+    clearLastError(siteId) {
+        const siteState = this.getSiteState(siteId);
+        if (siteState.lastError) {
+            siteState.lastError = null;
+        }
+    }
+
+    /**
      * Get summary of state for logging
      * @returns {Object}
      */

@@ -162,4 +162,70 @@ describe('StateManager', () => {
             expect(summary.totalDocuments).toBe(3);
         });
     });
+
+    describe('Error Tracking', () => {
+        it('getLastError() returns null for new site', () => {
+            const error = stateManager.getLastError('new-site');
+            expect(error).toBeNull();
+        });
+
+        it('setLastError() stores error info', () => {
+            stateManager.setLastError('test-site', {
+                fingerprint: 'abc123',
+                message: 'Navigation failed',
+                step: { action: 'click', selector: '#btn' },
+            });
+
+            const error = stateManager.getLastError('test-site');
+            expect(error).toBeDefined();
+            expect(error.fingerprint).toBe('abc123');
+            expect(error.message).toBe('Navigation failed');
+            expect(error.consecutiveCount).toBe(1);
+        });
+
+        it('setLastError() increments consecutive count for same fingerprint', () => {
+            stateManager.setLastError('test-site', {
+                fingerprint: 'abc123',
+                message: 'Error 1',
+            });
+            stateManager.setLastError('test-site', {
+                fingerprint: 'abc123',
+                message: 'Error 1',
+            });
+
+            const error = stateManager.getLastError('test-site');
+            expect(error.consecutiveCount).toBe(2);
+        });
+
+        it('setLastError() resets count for different fingerprint', () => {
+            stateManager.setLastError('test-site', {
+                fingerprint: 'abc123',
+                message: 'Error 1',
+            });
+            stateManager.setLastError('test-site', {
+                fingerprint: 'abc123',
+                message: 'Error 1',
+            });
+            stateManager.setLastError('test-site', {
+                fingerprint: 'def456',
+                message: 'Different error',
+            });
+
+            const error = stateManager.getLastError('test-site');
+            expect(error.fingerprint).toBe('def456');
+            expect(error.consecutiveCount).toBe(1);
+        });
+
+        it('clearLastError() removes stored error', () => {
+            stateManager.setLastError('test-site', {
+                fingerprint: 'abc123',
+                message: 'Error',
+            });
+
+            stateManager.clearLastError('test-site');
+
+            const error = stateManager.getLastError('test-site');
+            expect(error).toBeNull();
+        });
+    });
 });

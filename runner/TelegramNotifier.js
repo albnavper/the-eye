@@ -146,18 +146,65 @@ export class TelegramNotifier {
      * @param {Object} context 
      */
     async notifyError(siteName, error, context = {}) {
-        const message = `❌ <b>[${this.escapeHtml(siteName)}] Error</b>\n\n` +
-            `<b>URL:</b> ${this.escapeHtml(context.url || 'N/A')}\n` +
-            (context.step ? `<b>Paso:</b> ${this.escapeHtml(JSON.stringify(context.step))}\n` : '') +
-            `<b>Error:</b> <code>${this.escapeHtml(error.message)}</code>\n` +
-            (error.stack ? `\n<pre>${this.escapeHtml(error.stack.substring(0, 500))}</pre>` : '');
+        const timestamp = new Date().toLocaleString('es-ES', {
+            timeZone: 'Europe/Madrid',
+            dateStyle: 'short',
+            timeStyle: 'medium'
+        });
+
+        // Build detailed error message
+        let message = `❌ <b>[${this.escapeHtml(siteName)}] Monitor Fallido</b>\n`;
+        message += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+        // Error details
+        message += `⏰ <b>Hora:</b> ${timestamp}\n`;
+        message += `🌐 <b>URL:</b> ${this.escapeHtml(context.url || 'N/A')}\n`;
+
+        if (context.siteId) {
+            message += `🏷️ <b>Site ID:</b> <code>${this.escapeHtml(context.siteId)}</code>\n`;
+        }
+
+        // Step information if navigation failed
+        if (context.step) {
+            message += `\n📍 <b>Paso que falló:</b>\n`;
+            message += `   • Acción: <code>${this.escapeHtml(context.step.action || 'unknown')}</code>\n`;
+
+            if (context.step.selector) {
+                message += `   • Selector: <code>${this.escapeHtml(context.step.selector)}</code>\n`;
+            }
+            if (context.stepIndex !== undefined) {
+                message += `   • Paso #${context.stepIndex + 1} de ${context.totalSteps || '?'}\n`;
+            }
+        }
+
+        // Error information
+        message += `\n🔴 <b>Error:</b> ${this.escapeHtml(error.name || 'Error')}\n`;
+        message += `<code>${this.escapeHtml(error.message)}</code>\n`;
+
+        // Stack trace (truncated)
+        if (error.stack && context.includeStack !== false) {
+            const stackLines = error.stack.split('\n').slice(1, 4).join('\n');
+            message += `\n<pre>${this.escapeHtml(stackLines)}</pre>`;
+        }
+
+        // Retry info
+        if (context.retryCount !== undefined) {
+            message += `\n\n🔄 Falló después de ${context.retryCount} reintentos`;
+        }
+
+        // Consecutive failure warning  
+        if (context.consecutiveCount && context.consecutiveCount > 1) {
+            message += `\n\n⚠️ <i>Este mismo error ha ocurrido ${context.consecutiveCount} veces consecutivas</i>`;
+        }
 
         // Send text message first
         await this.sendMessage(message);
 
         // Send screenshot if available
         if (context.screenshot) {
-            await this.sendPhoto(context.screenshot, `Screenshot del error en ${siteName}`);
+            const caption = `📸 Captura del error en ${this.escapeHtml(siteName)}\n` +
+                `${timestamp}`;
+            await this.sendPhoto(context.screenshot, caption);
         }
     }
 
