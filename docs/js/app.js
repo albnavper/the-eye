@@ -146,6 +146,11 @@ createApp({
             saveLocally();
         };
 
+        const toggleSiteEnabled = (site) => {
+            site.enabled = site.enabled === false ? true : false;
+            saveLocally();
+        };
+
         const addStep = () => {
             activeSite.value.steps.push({
                 action: 'click',
@@ -263,6 +268,7 @@ createApp({
             selectSite,
             createNewSite,
             deleteSite,
+            toggleSiteEnabled,
             addStep,
             removeStep,
             saveChanges,

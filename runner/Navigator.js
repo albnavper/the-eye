@@ -29,10 +29,26 @@ export class Navigator {
   async navigate(page, steps) {
     for (let i = 0; i < steps.length; i++) {
       const step = steps[i];
-      try {
-        await this.executeStep(page, step);
-        console.log(`  ✓ Step ${i + 1}/${steps.length}: ${step.action} ${step.selector || ''}`);
-      } catch (error) {
+      const maxRetries = step.retries ?? 1; // Default: 1 retry (2 total attempts)
+      let lastError = null;
+      let success = false;
+
+      for (let attempt = 0; attempt <= maxRetries && !success; attempt++) {
+        try {
+          await this.executeStep(page, step);
+          console.log(`  ✓ Step ${i + 1}/${steps.length}: ${step.action} ${step.selector || ''}`);
+          success = true;
+        } catch (error) {
+          lastError = error;
+
+          if (attempt < maxRetries) {
+            console.log(`  ⚡ Step ${i + 1} attempt ${attempt + 1} failed, retrying...`);
+            await page.waitForTimeout(1000 * (attempt + 1)); // Exponential backoff
+          }
+        }
+      }
+
+      if (!success) {
         // Capture diagnostic info
         let screenshot = null;
         let html = null;
@@ -48,12 +64,12 @@ export class Navigator {
 
         // If step is optional, log and continue
         if (step.optional) {
-          console.log(`  ⚠ Step ${i + 1}/${steps.length} (optional) failed: ${error.message}`);
+          console.log(`  ⚠ Step ${i + 1}/${steps.length} (optional) failed: ${lastError.message}`);
           continue;
         }
 
         throw new NavigationError(
-          `Navigation step failed: ${step.action} - ${error.message}`,
+          `Navigation step failed: ${step.action} - ${lastError.message}`,
           step,
           i,
           screenshot,

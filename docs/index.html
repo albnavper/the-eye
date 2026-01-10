@@ -121,16 +121,27 @@
                         class="p-3 rounded-lg cursor-pointer flex items-center gap-3 transition-colors border border-transparent"
                         :class="activeSiteId === site.id ? 'bg-primary/20 border-primary/50' : 'hover:bg-dark hover:border-gray-700'">
 
-                        <!-- Status Pill -->
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-                            :class="site.enabled ? 'bg-green-500/20 text-green-400' : 'bg-gray-600/20 text-gray-400'">
-                            <i class="fa-solid" :class="site.enabled ? 'fa-check' : 'fa-pause'"></i>
-                        </div>
+                        <!-- Toggle Button -->
+                        <button @click.stop="toggleSiteEnabled(site)"
+                            class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-all hover:scale-105"
+                            :class="site.enabled !== false ? 'bg-green-500/20 text-green-400 hover:bg-green-500/30' : 'bg-gray-600/20 text-gray-400 hover:bg-gray-600/30'"
+                            :title="site.enabled !== false ? 'Click to pause monitoring' : 'Click to resume monitoring'">
+                            <i class="fa-solid" :class="site.enabled !== false ? 'fa-check' : 'fa-pause'"></i>
+                        </button>
 
                         <!-- Info -->
                         <div class="min-w-0 flex-1">
                             <div class="font-medium truncate">{{ site.name }}</div>
-                            <div class="text-xs text-gray-500 truncate">{{ site.url }}</div>
+                            <div class="text-xs text-gray-500 truncate flex items-center gap-2">
+                                <span class="truncate">{{ site.url }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Count badge -->
+                        <div v-if="site.extraction?.listSelector"
+                            class="text-xs px-2 py-0.5 rounded bg-gray-700 text-gray-400 shrink-0"
+                            title="Configured for monitoring">
+                            <i class="fa-solid fa-list-check"></i>
                         </div>
                     </div>
                 </div>
@@ -228,6 +239,20 @@
                                 </div>
                                 <span class="ml-3 text-sm font-medium text-gray-300">Enabled</span>
                             </label>
+                            <!-- Action Buttons -->
+                            <div class="flex gap-2 ml-auto">
+                                <a :href="'https://github.com/albnavper/the-eye/actions/workflows/monitor.yml?query=branch%3Amain'"
+                                    target="_blank"
+                                    class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white text-sm rounded-lg flex items-center gap-2">
+                                    <i class="fa-solid fa-clock-rotate-left"></i> View Runs
+                                </a>
+                                <a :href="'https://github.com/albnavper/the-eye/actions/workflows/monitor.yml'"
+                                    target="_blank"
+                                    class="px-4 py-2 bg-primary hover:bg-primary/80 text-white text-sm rounded-lg flex items-center gap-2"
+                                    title="Open GitHub Actions to run a test for this site">
+                                    <i class="fa-solid fa-play"></i> Run Test
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
