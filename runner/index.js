@@ -188,11 +188,53 @@ async function processSite(site, browser, stateManager, notifier, args) {
         let documents = await extractor.extract(page, site.extraction);
 
         if (documents.length === 0) {
-            console.log('  No documents found');
+            console.log('  ⚠️ No documents found');
+
             // Debug: save screenshot to see what the page looks like
             const debugPath = path.join(ROOT_DIR, 'downloads', `debug-${site.id}-${Date.now()}.png`);
-            await page.screenshot({ path: debugPath, fullPage: true });
-            console.log(`  Debug screenshot saved: ${debugPath}`);
+            let screenshot = null;
+            try {
+                screenshot = await page.screenshot({ fullPage: true });
+                await fs.writeFile(debugPath, screenshot);
+                console.log(`  Debug screenshot saved: ${debugPath}`);
+            } catch { }
+
+            // Treat "no documents found" as a warning that should be notified (with deduplication)
+            const warningFingerprint = createErrorFingerprint(
+                { name: 'NoDocumentsFound', message: 'No documents found with selector' },
+                { action: 'extract', selector: site.extraction.listSelector }
+            );
+            const lastError = stateManager.getLastError(site.id);
+            const isDuplicate = lastError?.fingerprint === warningFingerprint;
+
+            stateManager.setLastError(site.id, {
+                fingerprint: warningFingerprint,
+                message: `No documents found with selector: ${site.extraction.listSelector}`,
+                step: { action: 'extract', selector: site.extraction.listSelector },
+            });
+
+            const shouldNotify = !args.dryRun || args.notify;
+            if (shouldNotify && !isDuplicate) {
+                try {
+                    const currentError = stateManager.getLastError(site.id);
+                    await notifier.notifyError(site.name,
+                        { name: 'NoDocumentsFound', message: `No se encontraron documentos con el selector: ${site.extraction.listSelector}` },
+                        {
+                            url: site.url,
+                            siteId: site.id,
+                            screenshot,
+                            consecutiveCount: currentError?.consecutiveCount,
+                            includeStack: false,
+                        }
+                    );
+                } catch (telegramErr) {
+                    console.log(`  ⚠️ Telegram failed: ${telegramErr.message}`);
+                }
+            } else if (isDuplicate) {
+                const count = stateManager.getLastError(site.id)?.consecutiveCount || 1;
+                console.log(`  ⏭️  Warning duplicada (${count}x consecutivo), notificación omitida`);
+            }
+
             await context.close();
             return { success: true, documents: 0, new: 0, updated: 0 };
         }
