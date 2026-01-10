@@ -391,6 +391,9 @@ async function main() {
     console.log('SUMMARY');
     console.log('═'.repeat(60));
 
+    const successful = results.filter(r => r.success);
+    const failed = results.filter(r => !r.success);
+
     for (const result of results) {
         const status = result.success ? '✓' : '✗';
         const details = result.success
@@ -399,8 +402,17 @@ async function main() {
         console.log(`${status} ${result.site}: ${details}`);
     }
 
-    const failed = results.filter(r => !r.success).length;
-    process.exit(failed > 0 ? 1 : 0);
+    console.log(`\n${successful.length}/${results.length} sites processed successfully`);
+
+    // Only fail if ALL sites failed (partial success is acceptable)
+    if (failed.length === results.length && results.length > 0) {
+        console.error('\n❌ All sites failed!');
+        process.exit(1);
+    } else if (failed.length > 0) {
+        console.log(`\n⚠️  ${failed.length} site(s) had errors (partial success)`);
+    }
+
+    process.exit(0);
 }
 
 // Run
