@@ -4,9 +4,10 @@
 name: Document Monitor
 
 on:
-  schedule:
-    # Run every 30 minutes at offset minutes to avoid peak times
-    - cron: '7,37 * * * *'
+  # Temporarily disabled until all sites are tested
+  # schedule:
+  #   # Run every 30 minutes at offset minutes to avoid peak times
+  #   - cron: '7,37 * * * *'
   
   workflow_dispatch:
     inputs:
