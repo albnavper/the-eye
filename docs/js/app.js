@@ -8,6 +8,11 @@ createApp({
         const searchQuery = ref('');
         const sidebarOpen = ref(true);
         const activeTab = ref('general'); // general, steps, extraction
+        const syncStatus = ref('loading'); // loading, synced, local, error
+        const lastSyncTime = ref(null);
+
+        // GitHub raw URL for config
+        const GITHUB_CONFIG_URL = 'https://raw.githubusercontent.com/albnavper/the-eye/main/config/sites.json';
 
         // Navigation Tabs
         const tabs = [
@@ -53,30 +58,56 @@ createApp({
             );
         });
 
+        // Migrate site to include all fields
+        const migrateSite = (site) => {
+            if (!site.extraction) {
+                site.extraction = { listSelector: '', fields: {}, deepSearch: { enabled: false, selector: '', attribute: 'href' } };
+            }
+            if (!site.extraction.deepSearch) {
+                site.extraction.deepSearch = { enabled: false, selector: '', attribute: 'href' };
+            }
+            return site;
+        };
+
+        // Sync from GitHub repo
+        const syncFromRepo = async () => {
+            syncStatus.value = 'loading';
+            try {
+                const response = await fetch(GITHUB_CONFIG_URL + '?t=' + Date.now()); // Cache bust
+                if (!response.ok) throw new Error('Failed to fetch config');
+                const config = await response.json();
+                if (config.sites && Array.isArray(config.sites)) {
+                    sites.value = config.sites.map(migrateSite);
+                    lastSyncTime.value = new Date().toLocaleTimeString();
+                    syncStatus.value = 'synced';
+                    // Also save to localStorage as cache
+                    localStorage.setItem('the-eye-sites', JSON.stringify(sites.value));
+                    localStorage.setItem('the-eye-sync-time', lastSyncTime.value);
+                }
+            } catch (err) {
+                console.error('Failed to sync from repo:', err);
+                // Fall back to localStorage
+                const stored = localStorage.getItem('the-eye-sites');
+                if (stored) {
+                    sites.value = JSON.parse(stored).map(migrateSite);
+                    lastSyncTime.value = localStorage.getItem('the-eye-sync-time') || 'cached';
+                    syncStatus.value = 'local';
+                } else {
+                    sites.value = [];
+                    syncStatus.value = 'error';
+                }
+            }
+        };
+
         // Methods
         const loadSites = () => {
-            // Try loading from localStorage first
-            const stored = localStorage.getItem('the-eye-sites');
-            if (stored) {
-                const parsed = JSON.parse(stored);
-                // Migrate sites to include deepSearch if missing
-                sites.value = parsed.map(site => {
-                    if (!site.extraction) {
-                        site.extraction = { listSelector: '', fields: {}, deepSearch: { enabled: false, selector: '', attribute: 'href' } };
-                    }
-                    if (!site.extraction.deepSearch) {
-                        site.extraction.deepSearch = { enabled: false, selector: '', attribute: 'href' };
-                    }
-                    return site;
-                });
-            } else {
-                // Initialize with empty array
-                sites.value = [];
-            }
+            // Always sync from repo on load
+            syncFromRepo();
         };
 
         const saveLocally = () => {
             localStorage.setItem('the-eye-sites', JSON.stringify(sites.value));
+            syncStatus.value = 'local'; // Mark as having local changes
         };
 
         const selectSite = (site) => {
@@ -214,6 +245,8 @@ createApp({
             sidebarOpen,
             tabs,
             activeTab,
+            syncStatus,
+            lastSyncTime,
             selectSite,
             createNewSite,
             deleteSite,
@@ -222,7 +255,8 @@ createApp({
             saveChanges,
             publishChanges,
             exportConfig,
-            importConfig
+            importConfig,
+            syncFromRepo
         };
     }
 }).mount('#app');

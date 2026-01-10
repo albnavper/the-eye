@@ -167,7 +167,27 @@
                     <h2 v-else class="font-semibold text-lg">Dashboard</h2>
                 </div>
 
-                <div class="flex gap-3">
+                <div class="flex gap-3 items-center">
+                    <!-- Sync Status Indicator -->
+                    <div class="flex items-center gap-2 text-sm">
+                        <span v-if="syncStatus === 'loading'" class="text-yellow-400">
+                            <i class="fa-solid fa-spinner fa-spin"></i> Syncing...
+                        </span>
+                        <span v-else-if="syncStatus === 'synced'" class="text-green-400"
+                            :title="'Last sync: ' + lastSyncTime">
+                            <i class="fa-solid fa-cloud-check"></i> Synced
+                        </span>
+                        <span v-else-if="syncStatus === 'local'" class="text-amber-400" title="Using cached data">
+                            <i class="fa-solid fa-database"></i> Local
+                        </span>
+                        <span v-else class="text-red-400">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Error
+                        </span>
+                        <button @click="syncFromRepo" class="text-gray-400 hover:text-white p-1"
+                            title="Refresh from GitHub">
+                            <i class="fa-solid fa-rotate"></i>
+                        </button>
+                    </div>
                     <a href="https://github.com/albnavper/the-eye" target="_blank"
                         class="text-gray-400 hover:text-white">
                         <i class="fa-brands fa-github text-xl"></i>
