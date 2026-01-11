@@ -118,14 +118,19 @@
                 },
                 {
                     "action": "evaluate",
-                    "script": "const links = document.querySelectorAll('a'); for(let a of links) { if(a.textContent.includes('BOMBERO') && a.textContent.includes('19')) { a.click(); break; } }"
+                    "script": "const links = document.querySelectorAll('a'); for(let a of links) { if(a.textContent.includes('BOMBERO') && a.textContent.includes('19') && !a.textContent.includes('2020')) { a.click(); break; } }"
                 },
                 {
                     "action": "wait_ajax"
                 },
                 {
                     "action": "wait",
-                    "value": 3000
+                    "value": 5000
+                },
+                {
+                    "action": "waitForSelector",
+                    "selector": "div.tramites",
+                    "timeout": 15000
                 }
             ],
             "extraction": {
@@ -204,7 +209,12 @@
                 },
                 {
                     "action": "wait",
-                    "value": 3000
+                    "value": 5000
+                },
+                {
+                    "action": "waitForSelector",
+                    "selector": "div.tramites",
+                    "timeout": 15000
                 }
             ],
             "extraction": {
