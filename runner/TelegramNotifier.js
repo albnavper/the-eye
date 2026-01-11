@@ -103,8 +103,15 @@ export class TelegramNotifier {
      * @param {string} filePath 
      */
     async notifyNewDocument(siteName, doc, filePath) {
+        let titleLine = `<b>Nuevo:</b> ${this.escapeHtml(doc.title || 'Sin título')}`;
+
+        // Include expediente number if available (for Licitaciones/Contratos Menores)
+        if (doc.expediente) {
+            titleLine = `<b>Nuevo:</b> [${this.escapeHtml(doc.expediente)}] ${this.escapeHtml(doc.title || 'Sin título')}`;
+        }
+
         const caption = `📄 <b>[${this.escapeHtml(siteName)}]</b>\n` +
-            `<b>Nuevo:</b> ${this.escapeHtml(doc.title || 'Sin título')}\n` +
+            `${titleLine}\n` +
             (doc.date ? `📅 ${this.escapeHtml(doc.date)}\n` : '') +
             `🔗 <a href="${doc.url}">Ver original</a>`;
 
@@ -127,8 +134,15 @@ export class TelegramNotifier {
             ? '(contenido modificado)'
             : '(nueva URL)';
 
+        let titleLine = `<b>Actualizado:</b> ${this.escapeHtml(doc.title || 'Sin título')} ${reasonText}`;
+
+        // Include expediente number if available (for Licitaciones/Contratos Menores)
+        if (doc.expediente) {
+            titleLine = `<b>Actualizado:</b> [${this.escapeHtml(doc.expediente)}] ${this.escapeHtml(doc.title || 'Sin título')} ${reasonText}`;
+        }
+
         const caption = `🔄 <b>[${this.escapeHtml(siteName)}]</b>\n` +
-            `<b>Actualizado:</b> ${this.escapeHtml(doc.title || 'Sin título')} ${reasonText}\n` +
+            `${titleLine}\n` +
             (doc.date ? `📅 ${this.escapeHtml(doc.date)}\n` : '') +
             `🔗 <a href="${doc.url}">Ver original</a>`;
 

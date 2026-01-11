@@ -50,14 +50,14 @@
                 }
             ],
             "extraction": {
-                "listSelector": "a[title='Ver']",
+                "listSelector": "#contenido table tbody tr:has(a[title='Ver'])",
                 "fields": {
                     "title": {
-                        "selector": ".",
-                        "attribute": "title"
+                        "selector": "td:nth-child(3)",
+                        "attribute": null
                     },
                     "url": {
-                        "selector": ".",
+                        "selector": "a[title='Ver']",
                         "attribute": "href"
                     }
                 },
@@ -315,14 +315,18 @@
                 }
             ],
             "extraction": {
-                "listSelector": "a[id*='enlaceExpediente']",
+                "listSelector": "table.resultados tbody tr:has(a[id*='enlaceExpediente'])",
                 "fields": {
+                    "expediente": {
+                        "selector": "a[id*='enlaceExpediente']",
+                        "attribute": null
+                    },
                     "title": {
-                        "selector": ".",
+                        "selector": "td:nth-child(3)",
                         "attribute": null
                     },
                     "url": {
-                        "selector": ".",
+                        "selector": "a[id*='enlaceExpediente']",
                         "attribute": "href"
                     }
                 },
@@ -374,14 +378,18 @@
                 }
             ],
             "extraction": {
-                "listSelector": "a[id*='enlaceExpediente']",
+                "listSelector": "table.resultados tbody tr:has(a[id*='enlaceExpediente'])",
                 "fields": {
+                    "expediente": {
+                        "selector": "a[id*='enlaceExpediente']",
+                        "attribute": null
+                    },
                     "title": {
-                        "selector": ".",
+                        "selector": "td:nth-child(3)",
                         "attribute": null
                     },
                     "url": {
-                        "selector": ".",
+                        "selector": "a[id*='enlaceExpediente']",
                         "attribute": "href"
                     }
                 },
