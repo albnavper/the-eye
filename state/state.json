@@ -1,69 +1,59 @@
 {
   "version": 1,
-  "lastUpdated": "2026-01-11T07:35:06.575Z",
+  "lastUpdated": "2026-01-11T07:46:47.166Z",
   "sites": {
     "dos-hermanas-bomberos": {
-      "lastCheck": "2026-01-11T07:29:52.406Z",
+      "lastCheck": "2026-01-11T07:44:31.492Z",
       "documents": [
         {
           "title": "ANUNCIO DE PROPUESTA DE NOMBRMAIENTO DE DOS BOMBEROS/AS-CONDUCTORES/AS FUNCIONARIOS DE CARRERA PROVENIENTES DE LA BOLSA DE TRABAJO",
           "url": "https://www.doshermanas.es/export/sites/ayto-dos-hermanas/concejalias/relaciones-humanas/.galleries/DOCUMENTOS-Oposiciones/2024/BOMBERO-CONDUCTOR/ANUNCIO-NOMBRMAIENTO-2-FUNCIONARIOS-BOLSA.pdf",
-          "hash": "00f7ec01b565bd857e1b2c4cada5d912689eb879b62131bab67b091de3aba184",
-          "firstSeen": "2026-01-11T07:29:52.406Z"
+          "firstSeen": "2026-01-11T07:44:31.492Z"
         },
         {
           "title": "ANUNCIO DE PROPUESTA DE NOMBRAMIENTO DE DOS BOMBEROS/AS-CONDUCTORES/AS",
           "url": "https://www.doshermanas.es/export/sites/ayto-dos-hermanas/concejalias/relaciones-humanas/.galleries/DOCUMENTOS-Oposiciones/2024/BOMBERO-CONDUCTOR/ANUNCIO-VALORACION-DEFINITIVA-DE-MERITOS-Y-PRELACION-FINAL.-BOMBERO-A-CONDUCTOR-A-1.pdf",
-          "hash": "a13033eaae5276c8fa7b397075739e1edbf0f4bd6592ee87966ec46c7003b02c",
-          "firstSeen": "2026-01-11T07:29:52.406Z"
+          "firstSeen": "2026-01-11T07:44:31.492Z"
         },
         {
           "title": "ANUNCIO DE VALORACIÓN DEFINITIVA DE MÉRITOS, PRELACIÓN FINAL Y PROPUESTA DE NOMBRAMIENTO.- BOMBERO/A-CONDUCTOR/A",
           "url": "https://www.doshermanas.es/export/sites/ayto-dos-hermanas/concejalias/relaciones-humanas/.galleries/DOCUMENTOS-Oposiciones/2024/BOMBERO-CONDUCTOR/ANUNCIO-VALORACION-DEFINITIVA-DE-MERITOS-Y-PRELACION-FINAL.-BOMBERO-A-CONDUCTOR-A.pdf",
-          "hash": "e8736d976ff13923350245d2f0126ed321804d9d6ad0fe3ba35103318ab6d720",
-          "firstSeen": "2026-01-11T07:29:52.406Z"
+          "firstSeen": "2026-01-11T07:44:31.492Z"
         },
         {
           "title": "ANUNCIO DE RESULTADOS DEL EXAMEN MÉDICO Y DE LA VALORACIÓN PROVISIONAL DE MÉRITOS.- BOMBERO-A CONDUCTOR-A",
           "url": "https://www.doshermanas.es/export/sites/ayto-dos-hermanas/concejalias/relaciones-humanas/.galleries/DOCUMENTOS-Oposiciones/2024/BOMBERO-CONDUCTOR/ANUNCIO-RESULTADO-EXAMEN-MEDICO-Y-VALORACION-PROVISIONAL-MERITOS.-BOMBERO-A-CONDUCTOR-A.pdf",
-          "hash": "bbb05557e2b2f8530fa5760ba7d54e88f9ff7a7b18cbcdb65e77622ce7fec71c",
-          "firstSeen": "2026-01-11T07:29:52.406Z"
+          "firstSeen": "2026-01-11T07:44:31.492Z"
         },
         {
           "title": "ANUNCIO DE RESULTADOS EVALUACIÓN PSICOLÓGICA Y CONVOCATORIA DE EXAMEN MÉDICO",
           "url": "https://www.doshermanas.es/export/sites/ayto-dos-hermanas/concejalias/relaciones-humanas/.galleries/DOCUMENTOS-Oposiciones/2024/BOMBERO-CONDUCTOR/Fdo.-Dig.-ANUNCIO-RESULTADOS-EVALUACION-PSICOLOGICA-Y-CONVOCATORIA-RECONOCIMIENTO-MEDICO.pdf",
-          "hash": "12d0fa4c5aee0e96c6d77b0bab474342d374ef4db32be8cfe4305a4a7fad306d",
-          "firstSeen": "2026-01-11T07:29:52.406Z"
+          "firstSeen": "2026-01-11T07:44:31.492Z"
         },
         {
           "title": "ANUNCIO DE CORRESPONDENCIA IDENTIFICACIÓN DE CANDIDATOS-AS/CODIGO NUMÉRICO/VALORACIÓN DE LA PRIMERA PRUEBA PSICOTÉCNICA.- BOMBERO/A-CONDUCTOR/A",
           "url": "https://www.doshermanas.es/export/sites/ayto-dos-hermanas/concejalias/relaciones-humanas/.galleries/DOCUMENTOS-Oposiciones/2024/BOMBERO-CONDUCTOR/Fdo.-Dig.-2.-ANUNCIO-RESULTADOS-PRUEBAS-PSICOTECNICAS-4.pdf",
-          "hash": "23ef7c39823cdaf929631630b10f43e725201c46646ddcae1dd08bdf2c1bfbb7",
-          "firstSeen": "2026-01-11T07:29:52.406Z"
+          "firstSeen": "2026-01-11T07:44:31.492Z"
         },
         {
           "title": "ANUNCIO DE VALORACIÓN DE LA PRIMERA PRUEBA PSICOTÉCNICA",
           "url": "https://www.doshermanas.es/export/sites/ayto-dos-hermanas/concejalias/relaciones-humanas/.galleries/DOCUMENTOS-Oposiciones/2024/BOMBERO-CONDUCTOR/fdo-dig-2a.-ANUNCIO-RESULTADOS-1-PRUEBAS-PSICOTECNICAS.pdf",
-          "hash": "cc0edbc069a81c4cf656c5f6f8705ecb8306e5e816d7d7845c1c820e4a19d4f7",
-          "firstSeen": "2026-01-11T07:29:52.406Z"
+          "firstSeen": "2026-01-11T07:44:31.492Z"
         },
         {
           "title": "ANUNCIO RELATIVO A LA FECHA DE REALIZACIÓN DE LAS PRUEBAS PSICOTÉCNICAS",
           "url": "https://www.doshermanas.es/export/sites/ayto-dos-hermanas/concejalias/relaciones-humanas/.galleries/DOCUMENTOS-Oposiciones/2024/BOMBERO-CONDUCTOR/ANUNCIO-CONVOCATORIA-PRUEBAS-PSICOTECNICAS.pdf",
-          "hash": "725e9fdfd1e916e1670023345151aeb65bd9632eda9755e9683203603cf85d51",
-          "firstSeen": "2026-01-11T07:29:52.406Z"
+          "firstSeen": "2026-01-11T07:44:31.492Z"
         },
         {
           "title": "ANUNCIO CALIFICACIÓN DEFINITIVA DE PRUEBA DE CONOCIMIENTO DEL CALLEJERO Y CALIFICACIÓN PROVISIONAL DE PRUEBA DE APTITUD FÍSICA.- BOMBERO/A CONDUCTOR/A",
           "url": "https://www.doshermanas.es/export/sites/ayto-dos-hermanas/concejalias/relaciones-humanas/.galleries/DOCUMENTOS-Oposiciones/2024/BOMBERO-CONDUCTOR/ANUNCIO-CALIFICACION-PRUEBAS-FISICAS.pdf",
-          "hash": "c2d13236e942a25dbe665039d1b72b86ea60744c9a9f42bf824c5cf267029a7f",
-          "firstSeen": "2026-01-11T07:29:52.406Z"
+          "firstSeen": "2026-01-11T07:44:31.492Z"
         },
         {
           "title": "MODIFICACIÓN DE ANUNCIO RELATIVO A LA CONVOCATORIA PARA LAS PRUEBAS FISICAS.- BOMBERO/A CONDUCTOR/A",
           "url": "https://www.doshermanas.es/export/sites/ayto-dos-hermanas/concejalias/relaciones-humanas/.galleries/DOCUMENTOS-Oposiciones/2024/BOMBERO-CONDUCTOR/ANUNCIO-MOFICIACION-ANUNCIO-CITACION-PRUEBAS-FISICAS.pdf",
-          "hash": "bdf0e8b2c9f94f61b5c21093697bcc0e871c89071f2a59858f2fe35bc63d9d6c",
-          "firstSeen": "2026-01-11T07:29:52.406Z"
+          "firstSeen": "2026-01-11T07:44:31.492Z"
         }
       ]
     },
@@ -77,371 +67,312 @@
           "action": "extract",
           "selector": "#contenido table tbody tr:has(a[title='Ver'])"
         },
-        "timestamp": "2026-01-11T07:30:08.823Z",
-        "consecutiveCount": 1
+        "timestamp": "2026-01-11T07:44:45.813Z",
+        "consecutiveCount": 2
       }
     },
     "dipusevilla-bomberos": {
-      "lastCheck": "2026-01-11T07:31:15.231Z",
+      "lastCheck": "2026-01-11T07:45:03.851Z",
       "documents": [
         {
           "title": "Oferta de Empleo Público 2019",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_BOP_299_OfertaEmpleoPublico_2019.pdf",
-          "hash": "90d313bc2bcb08d6413b2eedff0c525325c6afcc12bdeab1b27a4fa4f1b54e7e",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Enlace BOP n. 299, de 28 de diciembre de 2019",
           "url": "https://www.dipusevilla.es/export/bop/201912/28.pdf",
-          "hash": "282a272fd66a5463bbdac27dc3ab8931a78389f9a6bcd12119c7aee8eab8bc8d",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Bases Generales de las Ofertas de Empleo Público 2020 Turno Libre y reserva a personas con discapacidad.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_2020_BasesGenerales.pdf",
-          "hash": "0593749d9fc9d3df93d8395651616c8857d1b3b2eccc0da05b94ae0f619e8791",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Enlace BOP 78 de 7 de abril de 2021",
           "url": "https://www.dipusevilla.es/export/bop/202104/07.pdf",
-          "hash": "6c9f8db2ccf6806e80f24551c47d6668fc78178a406e185282641e4c48a995da",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio modificación parcial base 6ª Apartado 4, de las Bases Generales 2020 (BOP 286 de 13/12/22).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/BOP286_OEP_2020_modifica_BasesGenerales.pdf",
-          "hash": "b5a6dc67f0aa8cd67e0a8aeed530c65d50b37fd840c0329c37dc51978229b429",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Ampliación de la vigencia de las BBGG de las OEP 2020 y 2021, de Turno Libre y Reserva a Discapacidad, a las BBGG de la OEP 2019, y modificación de la calificación de ejercicio tipo test.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/anuncioBOPmodBBGGtest.pdf",
-          "hash": "eec262e042cb282add5a78bed5af1c70ce61070db0dddd6dffe277b5157bbf03",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Enlace BOP n. 113, de 19 de mayo de 2022",
           "url": "https://www.dipusevilla.es/export/bop/202205/19.pdf",
-          "hash": "ef994566e65ccf505d5d4f73d51162af706a2273c159110c5a3bb6bd3445b6ba",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Adecuación de las BBGG de las OEP 2019, 20, 21 y 22, de Turno libre y Reserva a Discapacidad, a la Ordenanza reguladora del uso de los medios electrónicos en la Diputación Provincial de Sevilla y sus Entes Instrumentales..",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/AnuncioBOPadaptaBBGGmedioselectronicos.pdf",
-          "hash": "88703250977b599f2f8750290142b7b4f40aa080f52a287c4718071d809d66ee",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Enlace BOP n. 195, de 24 de agosto de 2022",
           "url": "https://www.dipusevilla.es/export/bop/202208/24.pdf",
-          "hash": "070bb95195056d6d92e46a181ddfef476a6d6ed6e9d00789ae23693cf3c08bce",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio Modificación y Ampliación del plazo máximo entre ejercicios de los procesos selectivos de turno libre y reserva a personas con discapacidad de las OEP 2018 y 2019.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/Anuncio_BOP234_AmpliacionyModificacionPlazoEntreEjercicios.pdf",
-          "hash": "3e62460aed061f6f24629f62700293c03481c157e7a258b6e49341779b0e761c",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Enlace BOP n. 234, de 7 de octubre de 2020",
           "url": "https://www.dipusevilla.es/export/bop/202010/07.pdf",
-          "hash": "38b10ea28dd1a7515fb0e9f24fedd5df30e242a584eeedffefc69e387a3c9c69",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Bases específicas de la convocatoria.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_BOMB_Anuncio_BasesEspecificas.pdf",
-          "hash": "a867e6a1d8990c887cde146cbfe0443747721835a86bcd669a8dcd377cec03b1",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Enlace al BOP n. 241 de 18 de octubre de 2022",
           "url": "https://www.dipusevilla.es/export/bop/202210/18.pdf",
-          "hash": "7499d5f90ee993cb27b1f3677902fd699f61b46d8525de93280902121e202492",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Informe de Impacto de Género.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_BOMB_IIG.pdf",
-          "hash": "2b1d7217318454da5ee6291e37202acfc1611960b1c114ef99a391ca419ddc28",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Manual de Usuario de pago telemático.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/funcionamiento-TPV-Virtual.pdf",
-          "hash": "d548f1879f2f2560c06366fa047e90d437688386430a1e165fd7ddc477470f7d",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Enlace BOE n. 273, de 14 de noviembre de 2022",
           "url": "https://boe.es/boe/dias/2022/11/14/pdfs/BOE-A-2022-18619.pdf",
-          "hash": "24e97324b33a1b0dd0cc8226cdf49877c8e5b67372010360e6cfd0b4d02833dc",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio lista provisional de personas admitidas y excluidas, composición del Tribunal y fecha de realización del 1er. ejercicio. Plazo de subsanación: del 03 al 17 de enero de 2023, ambos inclusive.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_AnuncioBOPListaProvBombero19.pdf",
-          "hash": "1b909985da0e53a63c1d76c1dc20fe688cbf4f1441be0fb49bff2ac1cc3a0036",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Modificando parcialmente Resolución nº 109/23, de 20 de enero, por la que se aprueba lista definitiva de personas aspirantes admitidas y excluidas.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_R319ModifparcialR109de20enero.pdf",
-          "hash": "cd0a188f13f005db5c6cfe41d04f652227a06b2abb827757e0aeae46e1f722ab",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio plantillas correctoras del primer ejercicio (test). Plazo de alegaciones: del 6 al 10 de febrero de 2023, ambos inclusive.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/AnuncioPlantillasCorrectoras1EjercicioTest_Bombero19.pdf",
-          "hash": "26af40ff065d1a4befdd925a76e3264eb14c7a23b614ac0dabc5a7413f31e15d",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio contestando alegaciones a la plantilla correctora y calificación del primer ejercicio (test). Plazo de alegaciones del 1 al 7 de junio de 2023, ambos inclusive.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_AnuncioNotas1AlegacionesPlantillaBOMBERO19.pdf",
-          "hash": "b0409865e1f1ca9634e4c8a1b48f6a5ac81ecb64a3e0a25e2fd970c56d7e3d87",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio contestando alegaciones primer ejercicio.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_Anunciocontestandoalegacionesynotas1FUCA19.pdf",
-          "hash": "229c1bd56e70ce009450d0383254c92ae3c960f8252d6db18c64f061f2b35d99",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio resolviendo alegaciones, recursos de alzadas y nueva corrección del primer ejercicio (test). Plazo de alegaciones a calificaciones: del 13 al 19 de septiembre de 2023. Calendario realización del 2º (pruebas físicas).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/export/sites/DIP001_SEDE/sede/documentos/OEP/AnuncioSegundaCorreccion1EjercicioBOMBERO19.pdf",
-          "hash": "181d8f5d3a383095b09a50ee9c5a461b6995b50f0619a0f526a1d5013156a231",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Dejando sin efecto trámite de alegaciones a las calificaciones del primer ejercicio (test), y posponiendo fechas de celebración del 2º ejercicio (pruebas físicas).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/export/sites/DIP001_SEDE/sede/documentos/OEP/OEP_T51_Anunciodejandosinefectotramiteplazoalegaciones.pdf",
-          "hash": "7060b69263e1a881fe2a21996dc16c0601ad04eb86a44e5694413a0e152ad9ae",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio corrección primer ejercicio (test). Plazo de alegaciones a las calificaciones del 28 de septiembre al 4 de octubre de 2023, ambos inclusive.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/export/sites/DIP001_SEDE/sede/documentos/OEP/OEP_T51_AnuncioTerceraCorreccion1EjercicioBOMBERO19.pdf",
-          "hash": "a8c4e48b7852a6fb9d52070e1510c8459b79d697fde1074cb36dae667e2265b8",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Calendarización procesos selectivos en el marco de Ofertas de Empleo Público de la categoría de BOMBERO/A.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/CronologiaBomberos.pdf",
-          "hash": "aa5694f8976732572c211065321ad265f396c51b925e87cb8cd12625bde7a60b",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Contestando alegaciones a la calificación del primer ejercicio y fijando calendario de realización de pruebas físicas.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_AnuncioContestalaega1yfechaydistribucion2.pdf",
-          "hash": "0da99437952a7857684e8cb123b7782a25a1c0949b4faab72516e841c74d1a93",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio calificación pruebas físicas. Plazo de alegaciones: del 13 al 17 de noviembre de 2023, ambos inclusive.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_AnuncioCALFPRUEBASFISBombero19.pdf",
-          "hash": "77db1dcd67a5aeceb8f00fd882e9d6e2727a33a76e4b6481e6c81c2c2135f231",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio Lista de Aspirantes Aptos en 2º ejercicio (pruebas prácticas).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_AnuncioNotasDefi2BOMBEROFUCA19.pdf",
-          "hash": "5ac232ee6779b46f65885015a5f4e5cde6754fee8b32564005a44068acb179a9",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio rectificación error material apellido aspirante.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_AnuncioerrormaterialAnuncioAptosDefi.pdf",
-          "hash": "0da2f8346fa6abb8cddd8de06872505811331ff3a7f9b16809354f184a1eae3d",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio fecha realización tercer ejercicio (práctico).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_AnuncioFecha3BOMBEROFUCA19.pdf",
-          "hash": "b06106f825a9d8c1a85a225dd09ecca14c7f2ecc4cd9e3b48fcb1711dfb09721",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio plantilla correctora 3er. ejercicio (test-práctico). Plazo de alegaciones: del 8 al 10 de abril de 2024, ambos inclusive.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_AnuncioPlantilla3TestPracticoBOMBEROFUCA19.pdf",
-          "hash": "35e806bd66c108180cde87d82fd26404555db0f49580bfbf0fbe2dce39a378e6",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio contestando alegaciones a la plantilla 3er. ejercicio (test-práctico) y calificaciones. Plazo de alegaciones a las calificaciones: del 02 al 06 de agosto de 2024, ambos inclusive. (Publicado en Sede Electrónica el día 01/08/24).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_AnuncioContestandoAlegacionesyNotas3FUCA19.pdf",
-          "hash": "a923ab255c116648f3875d54db2424d795ce7bff11768467ff61449b1c89dc85",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio rectificación error material nombre aspirante.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_AnuncioerrormaterialAnuncioNotas3.pdf",
-          "hash": "82de3ccc5d06e3f2493bb614dae9751b3aef855f00649a383168fcbbef553ad6",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio apertura plazo presentación de méritos (fase de concurso) . Plazo de presentación: del 31 de octubre al 14 de noviembre de 2024, ambos inclusive. (Publicado en sede electrónica el día 30/10/24).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_AnuncioPRESENTMERITOSBOMBEROFUCA19.pdf",
-          "hash": "0a37305c0f3f280d36099835bcc5e645119f36d3e045c9ed4d0a2dbbab0a991e",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Nombrando Asesora fase concurso (méritos).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_R2405NombrandoAsesoraTribunalDoloresTenorioMora.pdf",
-          "hash": "c2b06b68fbc6f16fe434248953fd6344b98edd6849f3dab53771ef371a07b1fb",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         },
         {
           "title": "Anuncio Valoración Fase de Concurso (méritos). Plazo de alegaciones: del 16 al 22 de diciembre de 2025, ambos inclcusive. (Publicado en sede electrónica el día 15/12/25).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T51_AnuncioValoraMeritosBOMBEROFUCA19SECRETARIA.pdf",
-          "hash": "28d603cf5fd654cf1d67a21a16d04aa6d03f37e22ec3f36608a58d920a8da71e",
-          "firstSeen": "2026-01-11T07:31:15.231Z"
+          "firstSeen": "2026-01-11T07:45:03.851Z"
         }
       ]
     },
     "dipusevilla-bomberos-2020": {
-      "lastCheck": "2026-01-11T07:31:55.541Z",
+      "lastCheck": "2026-01-11T07:45:21.434Z",
       "documents": [
         {
           "title": "Informe de impacto de género.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_IIGFUCABOMB34pz20-21.pdf",
-          "hash": "b9d6728732335fb592eecef49b7e87cd7fef626d418308d15218fd0c7e8204cc",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Calendarización procesos selectivos en el marco de Ofertas de Empleo Público de la categoría de BOMBERO/A.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/CronologiaBomberos.pdf",
-          "hash": "aa5694f8976732572c211065321ad265f396c51b925e87cb8cd12625bde7a60b",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Comunicado del Área de Empleado Público: ruta de acceso información temas 11, 12 y 13 del Grupo II (materias específicas de la convocatoria).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_ComunicadoTemasEspecificosBomberos.pdf",
-          "hash": "1bfcde1d57260e1f845b11665e4f1a10e1ceb367fd8ddc8668d3cbe3b5d2e30c",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "BOE de 21/12/2023.- Presentación de solicitudes desde el 22 de diciembre de 2023 al 22 de enero de 2024, ambos inclusive.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_BOE304_21.12.23.pdf",
-          "hash": "8a632da345191adf5167102ef2940fd31e12ebe213531186818314df540cc9cf",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Comunicado del Área de Empleado Público: Acceso a contenidos de materias específicas.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_Anuncio-Bomberos_1.pdf",
-          "hash": "9ae53a4bd033a0f4c5337696c09c259a4f16bd58abf25811db2ede97920bdebe",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio distribución de aspirantes.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_AnuncioDistribASPIRANTES.pdf",
-          "hash": "437a063b87d1ce945aa274015c7282a5e07157a1e9baf57076546e4f19146e4c",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Mapa Universidad Pablo de Olavide.",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_MapaUPO.pdf",
-          "hash": "ed58fdcb94b1ab4ce48b6d867d0a6b4635f2c8055e839b0adf9edffcd77702d2",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Instrucciones para la realización del 1er. ejercicio (test).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_Instrucciones1BOMEROFUCA20y21.pdf",
-          "hash": "fafe18fbd5781891ae58002b6a65c818c4a78edabd9be7a7b1abb56affc30aa6",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Modelo plantilla 1er. ejercicio (test).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_MODELOHojaRespuesta_ExamenTest.pdf",
-          "hash": "b8c51052b11d3f42490ca3422cb0f054546a635a44878721f521dfb121725d0e",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio plantilla correctora 1er ejercicio (test). Plazo de alegaciones: del 27 de junio al 01 de julio de 2024, ambos inclusive. (Publicado en Sede Electrónica el 26/06/24).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_AnuncioPlantillaTestBOMBEROFUCA20y21.pdf",
-          "hash": "71d80abbde0eccefe2bdc1853682587a268926d50e9514f1d6adf4e96ef858ff",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio contestando alegaciones a la plantilla correctora y calificación 1er ejercicio (test). Plazo de alegaciones a las calificaciones: del 24 al 26 de septiembre de 2024, ambos inclusive. (Publicado en Sede Electrónica el 23/09/24).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_AnuncioAlegayNotas1BOMBERO20-21.pdf",
-          "hash": "61678cb549cf2db629e632d70d484a85592b14997ab50701c99f3040ab202070",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio resolviendo alegaciones a calificaciones del 1º ejercicio y fecha 2º ejercicio. (Publicado en Sede Electrónica el 05/12/24).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_AnuncioAlegacNotas1yfecha2BOMBERO20-21.pdf",
-          "hash": "d51ce4d0913fe7cdbe0a08787d0388d1e08e458c5b80e09117cd10112cfafa5f",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio estimación solicitudes de cambio de fecha 2º. Ejercicio (prueba física). (Publicado en sede electrónica el día 16/12/24).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_6.AnuncioNuevasFechasPruebasfisicasBOMBERO.pdf",
-          "hash": "9856b7725d8508093d0412fe34189a50bb72be9bb05e3b9e1e2c856312020b98",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio desestimando cambio de fecha para prueba física. (Publicado en sede electrónica el día 18/12/24).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_6.AnuncioNuevasFechasPruebasfisicasBOMBERO_2.pdf",
-          "hash": "e2087744084a39ae11e480cc9ab1e30e2f34ed482755e7ac7eaa5abc2096ecbf",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio calificaciones pruebas físicas. Plazo de alegaciones: del 27 de febrero al 4 de marzo de 2025. (Publicado en sede electrónica: 26 de febrero de 2025).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_AnuncionotasPruebasfisicas20_21.pdf",
-          "hash": "fc29f33666bf342ebb2bdd5b831f61c11fa1734c751d96090a1c4760a7989e7e",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio fecha celebración 3er ejercicio (práctico). (Publicado en sede electrónica 17/03/25).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_AnuncioFecha3BOMBERO.pdf",
-          "hash": "cdc479b6b01e41c6bc1d10518e217b2c09d6e5496591ef7d20f172d2d965b95d",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio rectificación notas 2º ejercicio (pruebas físicas). (Publicado en sede electrónica 21/03/25).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_Anunciorectificanotas2BOMBERO20y21.pdf",
-          "hash": "dc32cb21b93e288687db59cc285a197e12ff30bd57ce1f4bbc0049ba35d19642",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio Distribución de personas aspirantes por Centros y Aulas 3er ejercicio (test práctico). (Publicado en sede electrónica 28/03/25, que sustituye a un anuncio anterior erróneamente publicado).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_distribucion_tercer_ejercicio_practico.pdf",
-          "hash": "eb987f1c5d94026261cb72254b12878ae4dc35c568f50ed5d773408a7d95b757",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio plantilla correctora 3er ejercicio (test-práctico). Plazo de alegaciones: del 02 al 04 de abril de 2025, ambos inclusive. (Publicado en sede electrónica el día 01/04/25).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_AnuncioPlantillaTest3ParaSedeBOMBEROFUCA20y21.odt.pdf",
-          "hash": "73d34a67b7dbd9a340e9714c0c61d6965cee3f1f2903231d6fd308047bb5c3e1",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio resolviendo alegaciones a la plantilla correctora 3er ejercicio. (Publicado en Sede Electrónica el 08/07/25).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_ANUNCIOalegacionesTERCERO_BOMBERO.pdf",
-          "hash": "966ff81c6e2dafb6e9a6cdd73c953cd231d97f77fc1a3b1e3734a2f4c7f76149",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio calificaciones 3er ejercicio. Plazo de alegaciones a las calificaciones: del 9 al 11 de julio de 2025. (Publicado en Sede Electrónica el 08/07/25).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_AnuncioNotas3BOMBERO.pdf",
-          "hash": "f7a5bede9c0e3407a4141b9dd29a7251b6a69beefdebaf6ccf199602de885374",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio resolviendo alegaciones a las calificaciones del tercer ejercicio (test-práctico). (Publicado en Sede Electrónica el 25/09/25).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/export/sites/DIP001_SEDE/sede/documentos/OEP/ANUNCIOresolucionalegacionesTERCERO_BOMBERO_21.pdf",
-          "hash": "dea4b649d73e93fcda3a87537300ee35338e3cd3bff6a357aa4f9f2297106b14",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         },
         {
           "title": "Anuncio calificaciones de fase oposición y apertura plazo presentación de méritos (fase de concurso). Plazo de presentación: del 6 al 20 de octubre de 2025, ambos inclusive. (Publicado en sede electrónica el día 06/10/25).",
           "url": "https://sedeelectronicadipusevilla.es/opencms/opencms/sede/documentos/OEP/OEP_T80_AnuncioFaseConcurso_BOMBEROFUCA21.pdf",
-          "hash": "5e4a44dcb13b848d51a9357ece1489243d1fd671a4aea4e9061ef4da47e0a966",
-          "firstSeen": "2026-01-11T07:31:55.541Z"
+          "firstSeen": "2026-01-11T07:45:21.434Z"
         }
       ]
     },
@@ -455,8 +386,8 @@
           "action": "extract",
           "selector": "a.gIconLink"
         },
-        "timestamp": "2026-01-11T07:32:03.018Z",
-        "consecutiveCount": 1
+        "timestamp": "2026-01-11T07:45:28.030Z",
+        "consecutiveCount": 2
       }
     },
     "cbpc-licitaciones": {
@@ -469,8 +400,8 @@
           "action": "extract",
           "selector": "table.resultados tbody tr:has(a[id*='enlaceExpediente'])"
         },
-        "timestamp": "2026-01-11T07:32:38.943Z",
-        "consecutiveCount": 1
+        "timestamp": "2026-01-11T07:46:01.505Z",
+        "consecutiveCount": 2
       }
     },
     "cbpc-contratos-menores": {
@@ -483,82 +414,82 @@
           "action": "extract",
           "selector": "table.resultados tbody tr:has(a[id*='enlaceExpediente'])"
         },
-        "timestamp": "2026-01-11T07:33:15.032Z",
-        "consecutiveCount": 1
+        "timestamp": "2026-01-11T07:46:34.509Z",
+        "consecutiveCount": 2
       }
     },
     "eprinsa-bomberos-33": {
-      "lastCheck": "2026-01-11T07:35:05.545Z",
+      "lastCheck": "2026-01-11T07:46:46.141Z",
       "documents": [
         {
           "title": "01/08/2025 - Anuncio en BOP lista provisional admitidos y excluidos. Plazo subsanación: del 02 al 18 de agosto.",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/3233474",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "01/08/2025 - Nota informativa presentación subsanaciones.",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/3233476",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "27/06/2025 - Anuncio en BOP emplazamiento intersados al PA 185/2025",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/3222240",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "30/04/2025 - Resolución nueva ampliación del plazo de presentación de solicitudes. Finalización plazo el 2 de mayo.",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/3198353",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "29/04/2025 - Resolución de ampliación del plazo de presentación de solicitudes en 1 día. Finalización del plazo, el 30 de abril.",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/3196387",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "31/03/2025 - Nota informativa para la presentación de solicitudes.",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/3182294",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "30/03/2025 - Extracto anuncio en el BOE. Plazo de solicitudes del 31 de marzo al 29 de abril.",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/3180876",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "18/03/2025 - Extrato anuncio BOJA modificación Bases",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/3175070",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "27/02/2025 - Anuncio en el BOP modificación Bases",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/3169264",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "17/01/2024 - Anuncio levantamiento suspensión cautelar ejecución del proceso selectivo.",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/2990960",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "25/04/2023 - Anuncio suspensión cautelar ejecución del proceso selectivo.",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/2894598",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "13/04/2023 - Extracto anuncio en el BOJA",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/2888538",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "13/04/2023 - Anuncio en el BOP emplazamiento al PA 24/2023 recurso contencioso ante las Bases",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/2888539",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         },
         {
           "title": "23/12/2022 - Publicación BOP Bases de la convocatoria",
           "url": "https://consorcioincendios-ofvirtual.e-admin.es/apiempleo/documentos/consulta/2792408",
-          "firstSeen": "2026-01-11T07:35:05.545Z"
+          "firstSeen": "2026-01-11T07:46:46.141Z"
         }
       ]
     }
