@@ -342,14 +342,19 @@
                 }
             ],
             "extraction": {
-                "listSelector": "a[id*='enlaceExpediente']",
+                "listSelector": "#myTablaBusquedaCustom tbody tr",
                 "fields": {
                     "title": {
-                        "selector": ".",
+                        "selector": "td:first-child > div:nth-child(2)",
                         "attribute": null
                     },
+                    "expediente": {
+                        "selector": "td:first-child a[id*='enlaceExpediente']",
+                        "attribute": null,
+                        "optional": true
+                    },
                     "url": {
-                        "selector": ".",
+                        "selector": "td:first-child a[id*='enlaceExpediente']",
                         "attribute": "onclick",
                         "regex": "idLicitacion','(\\d+)'",
                         "urlTemplate": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idLicitacion={value}"
@@ -420,14 +425,19 @@
                 }
             ],
             "extraction": {
-                "listSelector": "a[id*='enlaceExpediente']",
+                "listSelector": "#myTablaBusquedaCustom tbody tr",
                 "fields": {
                     "title": {
-                        "selector": ".",
+                        "selector": "td:first-child > div:nth-child(2)",
                         "attribute": null
                     },
+                    "expediente": {
+                        "selector": "td:first-child a[id*='enlaceExpediente']",
+                        "attribute": null,
+                        "optional": true
+                    },
                     "url": {
-                        "selector": ".",
+                        "selector": "td:first-child a[id*='enlaceExpediente']",
                         "attribute": "onclick",
                         "regex": "idLicitacion','(\\d+)'",
                         "urlTemplate": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idLicitacion={value}"
