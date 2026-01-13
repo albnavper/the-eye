@@ -297,20 +297,36 @@
                     "value": 3000
                 },
                 {
+                    "action": "wait_ajax"
+                },
+                {
+                    "action": "waitForSelector",
+                    "selector": "a[id$='linkFormularioBusqueda']",
+                    "timeout": 15000
+                },
+                {
                     "action": "evaluate",
-                    "script": "document.getElementById('viewns_Z7_AVEQAI930OBRD02JPMTPG21004_:form1:linkFormularioBusqueda').click();"
+                    "script": "const link = document.querySelector(\"a[id$='linkFormularioBusqueda']\"); if(link) link.click(); else throw new Error('Link Licitaciones no encontrado');"
                 },
                 {
                     "action": "wait",
-                    "value": 2000
+                    "value": 3000
+                },
+                {
+                    "action": "wait_ajax"
+                },
+                {
+                    "action": "waitForSelector",
+                    "selector": "input[id$='texoorganoMAQ']",
+                    "timeout": 15000
                 },
                 {
                     "action": "evaluate",
-                    "script": "const input = document.getElementById('viewns_Z7_AVEQAI930OBRD02JPMTPG21004_:form1:texoorganoMAQ'); if(input) { input.value = 'Presidencia del Consorcio de Bomberos de la Provincia de Cádiz'; }"
+                    "script": "const input = document.querySelector(\"input[id$='texoorganoMAQ']\"); if(input) { input.value = 'Presidencia del Consorcio de Bomberos de la Provincia de Cádiz'; input.dispatchEvent(new Event('input', {bubbles: true})); } else throw new Error('Input órgano no encontrado');"
                 },
                 {
                     "action": "evaluate",
-                    "script": "document.getElementById('viewns_Z7_AVEQAI930OBRD02JPMTPG21004_:form1:button1Arriba').click();"
+                    "script": "const btn = document.querySelector(\"input[id$='button1Arriba']\"); if(btn) btn.click(); else throw new Error('Botón buscar no encontrado');"
                 },
                 {
                     "action": "wait",
@@ -356,20 +372,36 @@
                     "value": 3000
                 },
                 {
+                    "action": "wait_ajax"
+                },
+                {
+                    "action": "waitForSelector",
+                    "selector": "a[id$='linkFormularioBusquedaContratosMenores']",
+                    "timeout": 15000
+                },
+                {
                     "action": "evaluate",
-                    "script": "document.getElementById('viewns_Z7_AVEQAI930OBRD02JPMTPG21004_:form1:linkFormularioBusquedaContratosMenores').click();"
+                    "script": "const link = document.querySelector(\"a[id$='linkFormularioBusquedaContratosMenores']\"); if(link) link.click(); else throw new Error('Link Contratos Menores no encontrado');"
                 },
                 {
                     "action": "wait",
-                    "value": 2000
+                    "value": 3000
+                },
+                {
+                    "action": "wait_ajax"
+                },
+                {
+                    "action": "waitForSelector",
+                    "selector": "input[id$='texoorganoMAQ']",
+                    "timeout": 15000
                 },
                 {
                     "action": "evaluate",
-                    "script": "const input = document.getElementById('viewns_Z7_AVEQAI930OBRD02JPMTPG21004_:form1:texoorganoMAQ'); if(input) { input.value = 'Presidencia del Consorcio de Bomberos de la Provincia de Cádiz'; }"
+                    "script": "const input = document.querySelector(\"input[id$='texoorganoMAQ']\"); if(input) { input.value = 'Presidencia del Consorcio de Bomberos de la Provincia de Cádiz'; input.dispatchEvent(new Event('input', {bubbles: true})); } else throw new Error('Input órgano no encontrado');"
                 },
                 {
                     "action": "evaluate",
-                    "script": "document.getElementById('viewns_Z7_AVEQAI930OBRD02JPMTPG21004_:form1:button1Arriba').click();"
+                    "script": "const btn = document.querySelector(\"input[id$='button1Arriba']\"); if(btn) btn.click(); else throw new Error('Botón buscar no encontrado');"
                 },
                 {
                     "action": "wait",
