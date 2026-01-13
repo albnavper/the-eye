@@ -70,6 +70,8 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ESCUELA_PC_USER: ${{ secrets.ESCUELA_PC_USER }}
+          ESCUELA_PC_PASS: ${{ secrets.ESCUELA_PC_PASS }}
         run: |
           ARGS=""
           if [ "${{ inputs.dry_run }}" = "true" ]; then

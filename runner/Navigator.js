@@ -169,6 +169,49 @@ export class Navigator {
         await page.goto(step.url, { waitUntil: step.waitUntil || 'domcontentloaded', timeout });
         break;
 
+      case 'authenticate':
+        // Fill login form and submit
+        // Supports environment variable substitution with ${VAR_NAME} syntax
+        const resolveEnvVar = (val) => {
+          if (typeof val === 'string' && val.startsWith('${') && val.endsWith('}')) {
+            const envName = val.slice(2, -1);
+            const envVal = process.env[envName];
+            if (!envVal) {
+              throw new Error(`Environment variable ${envName} is not set`);
+            }
+            return envVal;
+          }
+          return val;
+        };
+
+        const user = resolveEnvVar(step.user);
+        const pass = resolveEnvVar(step.pass);
+
+        // Fill username using evaluate to trigger Vue reactivity
+        await page.evaluate(({ selector, value }) => {
+          const el = document.querySelector(selector);
+          if (el) {
+            el.value = value;
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }, { selector: step.userSelector, value: user });
+
+        // Fill password using evaluate to trigger Vue reactivity
+        await page.evaluate(({ selector, value }) => {
+          const el = document.querySelector(selector);
+          if (el) {
+            el.value = value;
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }, { selector: step.passSelector, value: pass });
+
+        // Click submit button
+        await page.click(step.submitSelector, { timeout });
+
+        // Wait for navigation/network to settle
+        await page.waitForLoadState('networkidle', { timeout });
+        break;
+
       default:
         throw new Error(`Unknown action: ${step.action}`);
     }

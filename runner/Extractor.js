@@ -23,7 +23,7 @@ export class Extractor {
      * @returns {Promise<Array<{title: string, url: string, date?: string}>>}
      */
     async extract(page, config) {
-        const { listSelector, fields } = config;
+        const { listSelector, fields, filterPatterns } = config;
 
         // Find all document items
         const items = await page.$$(listSelector);
@@ -35,12 +35,12 @@ export class Extractor {
 
         console.log(`  Found ${items.length} document items`);
 
-        const documents = [];
+        let documents = [];
 
         for (const item of items) {
             try {
                 const doc = await this.extractDocument(item, fields, page);
-                if (doc && doc.url) {
+                if (doc && (doc.url || doc.title)) {
                     documents.push(doc);
                 }
             } catch (error) {
@@ -49,7 +49,41 @@ export class Extractor {
         }
 
         console.log(`  Extracted ${documents.length} valid documents`);
+
+        // Apply post-extraction filtering if configured
+        if (filterPatterns) {
+            documents = this.applyFilters(documents, filterPatterns);
+        }
+
         return documents;
+    }
+
+    /**
+     * Apply filters to extracted documents
+     * @param {Array} documents - Extracted documents
+     * @param {Object} filterConfig - Filter configuration
+     * @returns {Array} Filtered documents
+     */
+    applyFilters(documents, filterConfig) {
+        const { field, patterns, mode = 'include' } = filterConfig;
+
+        if (!field || !patterns || !patterns.length) {
+            return documents;
+        }
+
+        console.log(`  🔍 Filtering by ${field}: ${mode} patterns [${patterns.join(', ')}]`);
+
+        const filtered = documents.filter(doc => {
+            const fieldValue = (doc[field] || '').toLowerCase();
+            const matchesPattern = patterns.some(p => fieldValue.includes(p.toLowerCase()));
+
+            // 'include' mode: keep docs that match
+            // 'exclude' mode: keep docs that don't match
+            return mode === 'include' ? matchesPattern : !matchesPattern;
+        });
+
+        console.log(`  🔍 Filtered: ${filtered.length}/${documents.length} documents match criteria`);
+        return filtered;
     }
 
     /**

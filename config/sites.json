@@ -493,6 +493,173 @@
             },
             "timeout": 30000,
             "retries": 2
+        },
+        {
+            "id": "escuela-pc-cursos",
+            "name": "Escuela Protección Civil - Cursos Remotos",
+            "url": "https://escuela.proteccioncivil.es/gesProtCivil/public-site/inicio",
+            "enabled": true,
+            "steps": [
+                {
+                    "action": "wait",
+                    "value": 2000
+                },
+                {
+                    "action": "authenticate",
+                    "userSelector": "input[placeholder='Usuario']",
+                    "passSelector": "input[placeholder='Contraseña']",
+                    "submitSelector": "button.btn-primary",
+                    "user": "${ESCUELA_PC_USER}",
+                    "pass": "${ESCUELA_PC_PASS}"
+                },
+                {
+                    "action": "wait",
+                    "value": 4000
+                },
+                {
+                    "action": "wait_ajax"
+                },
+                {
+                    "action": "waitForSelector",
+                    "selector": "table#editions",
+                    "timeout": 15000,
+                    "optional": true
+                }
+            ],
+            "extraction": {
+                "listSelector": "table#editions tbody tr",
+                "fields": {
+                    "title": {
+                        "selector": "td:nth-child(3)",
+                        "attribute": null
+                    },
+                    "location": {
+                        "selector": "td:nth-child(4)",
+                        "attribute": null,
+                        "optional": true
+                    },
+                    "startDate": {
+                        "selector": "td:nth-child(5)",
+                        "attribute": null,
+                        "optional": true
+                    },
+                    "url": {
+                        "selector": "td:nth-child(3)",
+                        "attribute": null
+                    }
+                },
+                "filterPatterns": {
+                    "field": "location",
+                    "patterns": [
+                        "virtual",
+                        "online",
+                        "remoto",
+                        "campus",
+                        "distancia",
+                        "telemático",
+                        "telematico"
+                    ],
+                    "mode": "include"
+                },
+                "deepSearch": {
+                    "enabled": false,
+                    "selector": "",
+                    "attribute": "href"
+                }
+            },
+            "timeout": 45000,
+            "retries": 2
+        },
+        {
+            "id": "iespa-cursos",
+            "name": "IESPA - Cursos Policía Local Andalucía",
+            "url": "https://www.juntadeandalucia.es/organismos/ema/areas/formacion/iespa/paginas/curso-plataformas.html",
+            "enabled": true,
+            "steps": [
+                {
+                    "action": "wait",
+                    "value": 2000
+                },
+                {
+                    "action": "waitForSelector",
+                    "selector": ".field--name-field-contenido",
+                    "timeout": 15000
+                }
+            ],
+            "extraction": {
+                "listSelector": ".field--name-field-contenido a.file--mime-application-pdf",
+                "fields": {
+                    "title": {
+                        "selector": ".",
+                        "attribute": null
+                    },
+                    "url": {
+                        "selector": ".",
+                        "attribute": "href"
+                    }
+                },
+                "deepSearch": {
+                    "enabled": false,
+                    "selector": "",
+                    "attribute": "href"
+                }
+            },
+            "timeout": 30000,
+            "retries": 2
+        },
+        {
+            "id": "imfe-cursos",
+            "name": "IMFE Málaga - Cursos No Presenciales",
+            "url": "https://imfe.malaga.eu/proximos-cursos/",
+            "enabled": true,
+            "steps": [
+                {
+                    "action": "wait",
+                    "value": 2000
+                },
+                {
+                    "action": "waitForSelector",
+                    "selector": "table.table tbody tr",
+                    "timeout": 15000
+                }
+            ],
+            "extraction": {
+                "listSelector": "table.table tbody tr",
+                "fields": {
+                    "title": {
+                        "selector": "td:nth-child(2) a",
+                        "attribute": null
+                    },
+                    "url": {
+                        "selector": "td:nth-child(2) a",
+                        "attribute": "href"
+                    },
+                    "modality": {
+                        "selector": "td:nth-child(4)",
+                        "attribute": null,
+                        "optional": true
+                    },
+                    "date": {
+                        "selector": "td:nth-child(6)",
+                        "attribute": null,
+                        "optional": true
+                    }
+                },
+                "filterPatterns": {
+                    "field": "modality",
+                    "patterns": [
+                        "presencial"
+                    ],
+                    "mode": "exclude"
+                },
+                "deepSearch": {
+                    "enabled": false,
+                    "selector": "",
+                    "attribute": "href"
+                }
+            },
+            "timeout": 30000,
+            "retries": 2
         }
     ],
     "defaults": {
