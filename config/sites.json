@@ -451,6 +451,48 @@
             },
             "timeout": 30000,
             "retries": 2
+        },
+        {
+            "id": "famp-cursos",
+            "name": "FAMP - Próximos Cursos",
+            "url": "https://administracion.famp.es/",
+            "enabled": true,
+            "steps": [
+                {
+                    "action": "wait",
+                    "value": 3000
+                },
+                {
+                    "action": "waitForSelector",
+                    "selector": "#tabs-1 li.agendaitem",
+                    "timeout": 15000
+                }
+            ],
+            "extraction": {
+                "listSelector": "#tabs-1 li.agendaitem",
+                "fields": {
+                    "title": {
+                        "selector": ".agendatitulo a",
+                        "attribute": null
+                    },
+                    "url": {
+                        "selector": ".agendatitulo a",
+                        "attribute": "href"
+                    },
+                    "date": {
+                        "selector": "p.agendafechas",
+                        "attribute": null,
+                        "optional": true
+                    }
+                },
+                "deepSearch": {
+                    "enabled": false,
+                    "selector": "",
+                    "attribute": "href"
+                }
+            },
+            "timeout": 30000,
+            "retries": 2
         }
     ],
     "defaults": {
