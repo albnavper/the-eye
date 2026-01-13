@@ -126,7 +126,7 @@ export class Extractor {
             config = { selector: config, attribute: null };
         }
 
-        const { selector, attribute, property } = config;
+        const { selector, attribute, property, regex, urlTemplate } = config;
 
         // Find the target element
         const target = selector === '.' || selector === ''
@@ -156,6 +156,23 @@ export class Extractor {
             value = await target.getAttribute(attribute);
         } else {
             value = await target.textContent();
+        }
+
+        // Apply regex extraction if configured
+        if (value && regex) {
+            const match = value.match(new RegExp(regex));
+            if (match && match[1]) {
+                value = match[1];
+            } else {
+                // Regex didn't match, return null if no default
+                if (config.optional) return null;
+                throw new ExtractionError(`Regex did not match: ${regex}`, selector);
+            }
+        }
+
+        // Apply URL template if configured
+        if (value && urlTemplate) {
+            value = urlTemplate.replace('{value}', value);
         }
 
         return value ? value.trim() : null;

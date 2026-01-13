@@ -291,6 +291,7 @@
             "name": "CBPC - Licitaciones",
             "url": "https://contrataciondelestado.es/wps/portal/plataforma/buscadores",
             "enabled": true,
+            "skipDownload": true,
             "steps": [
                 {
                     "action": "wait",
@@ -349,7 +350,9 @@
                     },
                     "url": {
                         "selector": ".",
-                        "attribute": "href"
+                        "attribute": "onclick",
+                        "regex": "idLicitacion','(\\d+)'",
+                        "urlTemplate": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idLicitacion={value}"
                     }
                 },
                 "deepSearch": {
@@ -366,6 +369,7 @@
             "name": "CBPC - Contratos Menores",
             "url": "https://contrataciondelestado.es/wps/portal/plataforma/buscadores",
             "enabled": true,
+            "skipDownload": true,
             "steps": [
                 {
                     "action": "wait",
@@ -424,7 +428,9 @@
                     },
                     "url": {
                         "selector": ".",
-                        "attribute": "href"
+                        "attribute": "onclick",
+                        "regex": "idLicitacion','(\\d+)'",
+                        "urlTemplate": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idLicitacion={value}"
                     }
                 },
                 "deepSearch": {

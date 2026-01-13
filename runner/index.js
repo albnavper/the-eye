@@ -263,27 +263,41 @@ async function processSite(site, browser, stateManager, notifier, args) {
             console.log(`  📄 NEW: ${doc.title || doc.url}`);
 
             try {
-                // Download file
-                const download = await withRetry(
-                    () => downloader.download(page, doc.url),
-                    site.retries || 2
-                );
-
-                doc.hash = download.hash;
-
-                // Send to Telegram
-                if (shouldNotify) {
-                    try {
-                        await notifier.notifyNewDocument(site.name, doc, download.path);
-                        console.log(`    ✓ Sent to Telegram`);
-                    } catch (telegramErr) {
-                        console.log(`    ⚠️ Telegram failed: ${telegramErr.message}`);
+                // Skip download if configured (for sites that have HTML pages, not files)
+                if (site.skipDownload) {
+                    // Notify without file
+                    if (shouldNotify) {
+                        try {
+                            await notifier.notifyNewDocument(site.name, doc, null);
+                            console.log(`    ✓ Sent to Telegram (no file)`);
+                        } catch (telegramErr) {
+                            console.log(`    ⚠️ Telegram failed: ${telegramErr.message}`);
+                        }
                     }
-                }
+                    processed++;
+                } else {
+                    // Download file
+                    const download = await withRetry(
+                        () => downloader.download(page, doc.url),
+                        site.retries || 2
+                    );
 
-                // Cleanup downloaded file
-                await fs.unlink(download.path).catch(() => { });
-                processed++;
+                    doc.hash = download.hash;
+
+                    // Send to Telegram
+                    if (shouldNotify) {
+                        try {
+                            await notifier.notifyNewDocument(site.name, doc, download.path);
+                            console.log(`    ✓ Sent to Telegram`);
+                        } catch (telegramErr) {
+                            console.log(`    ⚠️ Telegram failed: ${telegramErr.message}`);
+                        }
+                    }
+
+                    // Cleanup downloaded file
+                    await fs.unlink(download.path).catch(() => { });
+                    processed++;
+                }
 
             } catch (error) {
                 console.log(`    ✗ Download failed: ${error.message}`);
@@ -302,27 +316,40 @@ async function processSite(site, browser, stateManager, notifier, args) {
             console.log(`  🔄 UPDATED: ${doc.title || doc.url} (${reason})`);
 
             try {
-                // Download file
-                const download = await withRetry(
-                    () => downloader.download(page, doc.url),
-                    site.retries || 2
-                );
-
-                doc.hash = download.hash;
-
-                // Send to Telegram
-                if (shouldNotify) {
-                    try {
-                        await notifier.notifyUpdatedDocument(site.name, doc, download.path, reason);
-                        console.log(`    ✓ Sent to Telegram`);
-                    } catch (telegramErr) {
-                        console.log(`    ⚠️ Telegram failed: ${telegramErr.message}`);
+                // Skip download if configured
+                if (site.skipDownload) {
+                    if (shouldNotify) {
+                        try {
+                            await notifier.notifyUpdatedDocument(site.name, doc, null, reason);
+                            console.log(`    ✓ Sent to Telegram (no file)`);
+                        } catch (telegramErr) {
+                            console.log(`    ⚠️ Telegram failed: ${telegramErr.message}`);
+                        }
                     }
-                }
+                    processed++;
+                } else {
+                    // Download file
+                    const download = await withRetry(
+                        () => downloader.download(page, doc.url),
+                        site.retries || 2
+                    );
 
-                // Cleanup
-                await fs.unlink(download.path).catch(() => { });
-                processed++;
+                    doc.hash = download.hash;
+
+                    // Send to Telegram
+                    if (shouldNotify) {
+                        try {
+                            await notifier.notifyUpdatedDocument(site.name, doc, download.path, reason);
+                            console.log(`    ✓ Sent to Telegram`);
+                        } catch (telegramErr) {
+                            console.log(`    ⚠️ Telegram failed: ${telegramErr.message}`);
+                        }
+                    }
+
+                    // Cleanup
+                    await fs.unlink(download.path).catch(() => { });
+                    processed++;
+                }
 
             } catch (error) {
                 console.log(`    ✗ Download failed: ${error.message}`);
