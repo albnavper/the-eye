@@ -506,9 +506,9 @@
                 },
                 {
                     "action": "authenticate",
-                    "userSelector": "input[placeholder='Usuario']",
-                    "passSelector": "input[placeholder='Contraseña']",
-                    "submitSelector": "button.btn-primary",
+                    "userSelector": "input[placeholder='User']",
+                    "passSelector": "input[placeholder='Password']",
+                    "submitSelector": "button:has-text('ACCESS')",
                     "user": "${ESCUELA_PC_USER}",
                     "pass": "${ESCUELA_PC_PASS}"
                 },
