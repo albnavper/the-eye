@@ -5,8 +5,8 @@ name: Document Monitor
 
 on:
   schedule:
-    # Run every 30 minutes
-    - cron: '7,37 * * * *'
+    # Run every 15 minutes
+    - cron: '7,22,37,52 * * * *'
   
   workflow_dispatch:
     inputs:
